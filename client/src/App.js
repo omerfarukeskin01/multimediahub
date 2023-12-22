@@ -9,6 +9,7 @@ import { AuthContext } from "./helper/AuthContext";
 import PageNotFound from "./pages/PageNotFound";
 import React, { useEffect, useState } from "react";
 import Profile from "./pages/Profile";
+import ChangePassword from "./pages/ChangePassword";
 
 import Liked from "./pages/Likedd"; // Yeni bileşeni import edin
 
@@ -98,6 +99,7 @@ function App() {
             <Route path="/registration" exact element={<Registration />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/profile/:id" exact element={<Profile/>}/>
+            <Route path="/changepassword" exact element={<ChangePassword/>}/>
             <Route path="*" exact Component={PageNotFound} />
           </Routes>
         </Router>
