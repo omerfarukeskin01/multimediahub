@@ -1,3 +1,18 @@
+/*  module.exports = (sequelize, DataTypes) => {
+  const Post = sequelize.define("Posts", {
+    PostText: {
+      type: DataTypes.STRING(255),
+    },
+  });
+  Post.associate = (models) => {
+    Post.belongsTo(models.Users);
+    Post.belongsTo(models.Medias);
+    Post.hasMany(models.PostComments);
+    Post.belongsToMany(models.Users, { through: "Likes" });
+  };
+
+  return Post;
+};  */
 module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define("Posts", {
     title: {
