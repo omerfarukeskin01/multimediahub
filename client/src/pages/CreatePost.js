@@ -46,6 +46,7 @@ function CreatePost() {
       });
   };
   return (
+    <>
     <div className="createPostPage">
       <Formik
         initialValues={initialValues}
@@ -73,15 +74,18 @@ function CreatePost() {
           <button type="submit">Create Post</button>
         </Form>
       </Formik>
-      {medias.map((value) => {
+      
+    </div>
+    {medias.map((value) => {
         return (
           <Media
             MediaNametext={value.MediaNametext}
             MediaImages={value.MediaImages}
+            MediaType={value.MediaType}
           ></Media>
         );
       })}
-    </div>
+    </>
   );
 }
 
