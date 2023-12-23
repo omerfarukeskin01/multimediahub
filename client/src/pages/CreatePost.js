@@ -69,8 +69,14 @@ function CreatePost() {
             name="postText"
             placeholder="(Ex. Post...)"
           />
-
-          <button type="submit">Create Post</button>
+        <div className="Button">
+        <button className="filmButton" type="submit">Film</button>
+        <button className="musicButton" type="submit">Music</button>
+        <button className="gamesButton" type="submit">Games</button>
+        </div>
+        <div className="CreatePost">
+        <button className="postButton" type="submit">CreatePost</button>  
+        </div>
         </Form>
       </Formik>
       {medias.map((value) => {

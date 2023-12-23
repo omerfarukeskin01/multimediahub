@@ -108,19 +108,91 @@ body {
   font-size: 20px;
 }
 
-.formContainer button {
-  margin-top: 15px;
-  height: 40px;
-  border: none;
-  background-color: lightskyblue;
-  border-radius: 5px;
-  color: white;
+.formContainer .Button {
+  display: flex;
 }
 
-.formContainer button:hover {
-  cursor: pointer;
-  background-color: dodgerblue;
+
+
+
+
+.formContainer button {
+  width: 9em;
+ height: 3em;
+ border-radius: 30em;
+ font-size: 15px;
+ font-family: inherit;
+ border: none;
+ position: relative;
+ overflow: hidden;
+ z-index: 1;
+ box-shadow: 6px 6px 12px #c5c5c5,
+             -6px -6px 12px #ffffff;
+ right: -1px;
 }
+
+
+
+
+
+.formContainer button::before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ .formContainer .postButton::before {
+  background-image: linear-gradient(to left,  #8ed6ff 0%,  #ffc1c8 100%);
+  content: '';
+  width: 0;
+  height: 4em;
+  border-radius: 100em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+}
+
+.formContainer .postButton {
+  width: 11em;
+ height: 4em;
+ border-radius: 30em;
+ font-size: 15px;
+ font-family: inherit;
+ border: none;
+ position: relative;
+ overflow: hidden;
+ z-index: 1;
+ box-shadow: 6px 6px 12px #c5c5c5,
+             -6px -6px 12px #ffffff;
+  right: -140px;
+  top: 10px;
+  
+}
+ 
+.formContainer .filmButton::before {
+  background-image: linear-gradient(to left,  #8ed6ff 0%,  #ffc1c8 100%);
+}
+
+.formContainer .musicButton::before {
+  background-image: linear-gradient(to right, #8ed6ff 0%, #66ff66 100%);
+}
+
+.formContainer .gamesButton::before {
+  background-image: linear-gradient(to right, #8ed6ff 0%, #ffcece 100%);
+}
+ 
+ .formContainer :hover::before {
+  width: 9em;
+ }
 
 span {
   color: red;
