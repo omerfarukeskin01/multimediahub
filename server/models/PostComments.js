@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Comments = sequelize.define("Comments", {
+  const PostComments = sequelize.define("PostComments", {
     commentBody: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -9,8 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-
-  return Comments;
+  PostComments.associate = (models) => {
+    PostComments.belongsTo(models.Users);
+    PostComments.belongsTo(models.Posts);
+  };
+  return PostComments;
 };
 /*   module.exports = (sequelize, DataTypes) => {
     const PostCommentModel = sequelize.define("PostComments", {

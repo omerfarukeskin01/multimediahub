@@ -1,6 +1,12 @@
-/* module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const FilmDetail = sequelize.define("FilmDetails", {
-
+    /*       MediaID: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Medias,
+          key: 'MediaID'
+        }
+      }, */
     FilmLength: {
       type: DataTypes.TIME,
     },
@@ -16,7 +22,17 @@
     Title: {
       type: DataTypes.STRING(50),
     },
-
+    /*       AddedOrUpdatedByUserId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Users,
+          key: 'UserID'
+        }
+      }, */
+    /*     isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }, */
   });
   FilmDetail.associate = (models) => {
     FilmDetail.belongsTo(models.Users);
@@ -24,4 +40,3 @@
   };
   return FilmDetail;
 };
- */

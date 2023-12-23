@@ -1,6 +1,10 @@
-/*  module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define("Posts", {
-    PostText: {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    postText: {
       type: DataTypes.STRING(255),
     },
   });
@@ -8,12 +12,15 @@
     Post.belongsTo(models.Users);
     Post.belongsTo(models.Medias);
     Post.hasMany(models.PostComments);
-    Post.belongsToMany(models.Users, { through: "Likes" });
+    //Post.belongsToMany(models.Users, { through: "Likes" });
+    Post.hasMany(models.Likes, {
+      onDelete: "cascade",
+    });
   };
 
   return Post;
-};  */
-module.exports = (sequelize, DataTypes) => {
+};
+/* module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define("Posts", {
     title: {
       type: DataTypes.STRING,
@@ -40,3 +47,4 @@ module.exports = (sequelize, DataTypes) => {
   };
   return Posts;
 };
+ */

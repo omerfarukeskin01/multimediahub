@@ -1,28 +1,33 @@
-/* module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("Users", {
-    UserName: {
+    username: {
       type: DataTypes.STRING(50),
     },
     Email: {
       type: DataTypes.STRING(50),
     },
-    UserPassword: {
-      type: DataTypes.STRING(50),
+    password: {
+      type: DataTypes.STRING,
     },
-    UserRole: {
+    Userrole: {
       type: DataTypes.STRING(50),
     },
   });
   User.associate = (models) => {
+    User.hasMany(models.Likes, {
+      onDelete: "cascade",
+    });
     User.hasMany(models.Medias);
     User.hasMany(models.Posts);
     User.hasMany(models.FilmDetails);
+
     User.hasMany(models.PostComments);
-    User.belongsToMany(models.Posts, { through: "Likes" });
+    //User.belongsToMany(models.Posts, { through: "Likes" });
   };
+
   return User;
-}; */
-module.exports = (sequelize, DataTypes) => {
+};
+/* module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define("Users", {
     username: {
       type: DataTypes.STRING,
@@ -46,3 +51,4 @@ module.exports = (sequelize, DataTypes) => {
 
   return Users;
 };
+ */

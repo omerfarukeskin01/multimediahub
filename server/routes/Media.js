@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { Posts, Likes } = require("../models");
+const { Medias, Posts, Likes } = require("../models");
 
 const { validateToken } = require("../middlewares/AuthMiddleware");
-const Users = require("../models/Users");
 
 router.get("/", validateToken, async (req, res) => {
-  const listOfPosts = await Posts.findAll({ include: [Likes] });
-  const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
-  res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
+  const listOfMedias = await Medias.findAll();
+  //const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
+  //res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
+  console.log(listOfMedias);
+  res.json(listOfMedias);
 });
 
-router.get("/byId/:id", async (req, res) => {
+/* router.get("/byId/:id", async (req, res) => {
   const id = req.params.id;
   const post = await Posts.findByPk(id);
   res.json(post);
@@ -37,6 +38,7 @@ router.put("/postText", validateToken, async (req, res) => {
   res.json(newText);
 });
 
+
 router.post("/", validateToken, async (req, res) => {
   const post = req.body;
   post.username = req.user.username;
@@ -54,6 +56,6 @@ router.delete("/:postId", validateToken, async (req, res) => {
   });
 
   res.json("DELETED SUCCESSFULLY");
-});
+}); */
 
 module.exports = router;

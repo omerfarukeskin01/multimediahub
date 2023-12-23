@@ -8,6 +8,8 @@ app.use(cors());
 const db = require("./models");
 
 // Routers
+const mediaRouter = require("./routes/Media");
+app.use("/medias", mediaRouter);
 const postRouter = require("./routes/Posts");
 app.use("/posts", postRouter);
 const commentsRouter = require("./routes/Comments");
