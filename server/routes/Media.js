@@ -8,7 +8,6 @@ router.get("/", validateToken, async (req, res) => {
   const listOfMedias = await Medias.findAll();
   //const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
   //res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
-  console.log(listOfMedias);
   res.json(listOfMedias);
 });
 
