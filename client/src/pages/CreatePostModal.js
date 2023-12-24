@@ -74,13 +74,6 @@ const CreatePostModal = (props) => {
                                 name="postText"
                                 placeholder="(Ex. Post...)"
                             />
-                           
-                         
-
-                        
-
-                        
-
 
                         </Form>
                     </Formik>
