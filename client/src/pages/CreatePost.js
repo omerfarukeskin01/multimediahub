@@ -58,7 +58,9 @@ function CreatePost() {
   };
   return (
     <>
-      <div className="createPostPage">
+      <div className="postPage"> 
+      <div className="leftSide"> 
+      
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
@@ -100,8 +102,10 @@ function CreatePost() {
             <button type="submit">Create Post</button>
           </Form>
         </Formik>
-
+      
       </div>
+
+      <div className="rightSide"> 
       {medias.map((value) => {
         return (
           <Media handleMediaId={handleMediaId}
@@ -112,6 +116,8 @@ function CreatePost() {
           ></Media>
         );
       })}
+      </div>
+      </div>
     </>
   );
 }

@@ -35,6 +35,9 @@ function Login() {
     <>
  
     <div className="loginContainer">
+    <div>
+      <h1 className="registrationpage">Login Page</h1>
+    </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="usernameicon">
     <path d="M2 22s3-2 4-3c0 0 6-6 6-9 0-4-3-7-7-7s-7 3-7 7c0 3 6 9 6 9 1 1 4 3 4 3"></path>
   </svg>
