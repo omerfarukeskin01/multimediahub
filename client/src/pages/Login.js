@@ -20,12 +20,12 @@ function Login() {
       } else {
         
         localStorage.setItem("accessToken", response.data.token);
-        alert(response.data.token)
+      
         console.log(response.data.token)
         setAuthState({
-          username: response.data.username,
-          id: response.data.id,
           status: true,
+          token: response.data.token
+         
         });
         navigate("/");
       }

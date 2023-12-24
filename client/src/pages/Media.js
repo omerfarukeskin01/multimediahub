@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 
 function Media(props) {
+
   const [inputValue, setInputValue] = useState('');
   const [isInputVisible, setInputVisible] = useState(false);
+  
 
+  const sendDataToCreatPost = () => {
+    
+ 
+
+    props.handleMediaId(props.id)
+  };
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -28,15 +36,15 @@ function Media(props) {
           width: '1000px', 
           height: '100px',
           backgroundColor: '#f0f0f0', 
-          margin: '10px' 
+          margin: '15px' 
       }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img src={props.MediaImages} alt="test" style={{ width: '100px', height: '100px', marginRight: '10px' }} />
-            <div>{props.MediaNametext}</div>
+            <div ><h3>{props.MediaNametext}</h3></div>
             <div style={{ marginLeft: '15px' }}>{props.MediaType}</div>
           </div>
           <div>
-              <button onClick={toggleInputVisibility} style={{background:'#1E90FF'}}>Share</button>
+              <button onClick={sendDataToCreatPost} style={{background:'#1E90FF'}}>Share</button>
           </div>
       </div>
 

@@ -11,8 +11,9 @@ function Home() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
+    
     //tamaen yanlış bir yaklaşım kullancı hiç giriş yapmazsa bu sefer ana sayfaya griiş yetkis olamdığı için boşa çıyor
-    if (!authState.status) {
+    if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
       axios.get("http://localhost:3001/posts", {
@@ -21,11 +22,12 @@ function Home() {
       .then((response) => {
         setListOfPosts(response.data.listOfPosts);
 
+
         if (authState.status) {
           const likedPostIds = response.data.likedPosts.map(like => like.PostId);
           setLikedPosts(likedPostIds);
         }
-        console.log()
+       
       });
     }
   }, [authState.status, navigate]);
@@ -68,16 +70,20 @@ function Home() {
 
   return (
     <div>
-      {listOfPosts.map((value, key) => {
+      {listOfPosts && listOfPosts.map((value, key) => {
         return (
+
           <div key={key} className="post">
-            <div className="title"> {value.title} </div>
+
+           
+            <div className="title"> {value.Media.MediaNametext} </div>
             <div
               className="body"
               onClick={() => {
                 navigate(`/post/${value.id}`);
               }}
             >
+              <img src={value.Media.MediaImages} alt="" height="150px"></img>
               {value.postText}
             </div>
             <div className="footer">
