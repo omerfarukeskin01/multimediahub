@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../helper/AuthContext";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import PostShow from "./PostShow";
 
 function Likedd() {
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -50,36 +51,8 @@ function Likedd() {
       });
   };
   return (
-    <div>
-      {likedPostsToShow.map((value, key) => {
-        return (
-          <div key={key} className="post">
-            <div className="title"> {value.title} </div>
-            <div
-              className="body"
-              onClick={() => {
-                navigate(`/post/${value.id}`);
-              }}
-            >
-              {value.postText}
-            </div>
-            <div className="footer">
-              <div className="username">{value.username}</div>
-              <div className="buttons">
-                <ThumbUpAltIcon
-                  onClick={() => {
-                    likeAPost(value.id);
-                  }}
-                  className={likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"}
-                />
-                <label> {value.Likes.length}</label>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+  <PostShow listOfPosts={likedPostsToShow} setListOfPosts={setLikedPostsToShow}/>
+    )
 }
 
 export default Likedd;
