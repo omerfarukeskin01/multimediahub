@@ -41,12 +41,12 @@ function CreatePost() {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("You must input a Title!"),
     postText: Yup.string().required(),
-   
-    
+
+
   });
 
   const onSubmit = (data) => {
-    data["MediaId"]=mediaId;
+    data["MediaId"] = mediaId;
     axios
       .post("http://localhost:3001/posts", data, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -86,7 +86,14 @@ function CreatePost() {
             <label>{mediaId} </label>
             <Field type="hidden" name="mediaid" value={mediaId} />
 
-           
+            <div className="Button">
+              <button className="filmButton" type="submit">Film</button>
+              <button className="musicButton" type="submit">Music</button>
+              <button className="gamesButton" type="submit">Games</button>
+            </div>
+            <div className="CreatePost">
+              <button className="postButton" type="submit">CreatePost</button>
+            </div>
 
 
 
