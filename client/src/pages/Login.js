@@ -21,7 +21,7 @@ function Login() {
         
         localStorage.setItem("accessToken", response.data.token);
       
-        console.log(response.data.token)
+  
         setAuthState({
           status: true,
           token: response.data.token,

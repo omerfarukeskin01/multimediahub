@@ -60,14 +60,14 @@ function PostShow(props) {
           <div key={key} className="post">
 
 
-            <div className="title"> {value.Media.MediaNametext} </div>
+            <div className="title"> {value.Media?.MediaNametext} </div>
             <div
               className="body"
               onClick={() => {
                 navigate(`/post/${value.id}`);
               }}
             >
-              <img src={value.Media.MediaImages} alt="" height="150px"></img>
+              <img src={value.Media?.MediaImages} alt="" height="150px"></img>
               {value.postText}
             </div>
             <div className="footer">

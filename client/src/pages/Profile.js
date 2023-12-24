@@ -12,12 +12,12 @@ function Profile() {
 
   useEffect(() => {
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
-        console.log("basic info : ", response)
-      setUsername(response.data.username);
+  
+      setUsername(response.data?.username);
     });
 
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
-        console.log("user id:  ",response.data)
+      
       setListOfPosts(response.data);
     });
   }, []);
