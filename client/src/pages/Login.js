@@ -33,9 +33,7 @@ function Login() {
   };
   return (
     <>
-    <div>
-      <h1>Login Page</h1>
-    </div>
+ 
     <div className="loginContainer">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="usernameicon">
     <path d="M2 22s3-2 4-3c0 0 6-6 6-9 0-4-3-7-7-7s-7 3-7 7c0 3 6 9 6 9 1 1 4 3 4 3"></path>
@@ -58,8 +56,12 @@ function Login() {
           setPassword(event.target.value);
         }}/>
 </div>
-
-      <button onClick={login}> Login </button>
+<button class="loginbutton" onClick={login}>
+  Login
+  <svg class="loginicon" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd"></path>
+  </svg>
+</button>
     </div>
     </>
   );
