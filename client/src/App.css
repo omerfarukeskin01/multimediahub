@@ -4,79 +4,389 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: rgb(24 27 32);
 }
 
 body {
   margin: 0;
   padding: 0;
 }
+/*Home Page comment */
+.card {
+  position: absolute;
+  top: 150px;
+  right: 200px;
+  width: 300px;
+  height: fit-content;
+   background-color: rgb(24 27 32);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 17px 17px 27px 27px;
+  padding: 20px 25px;
 
-.post {
-  width: 400px;
-  height: 300px;
-  border-radius: 10px;
+
+}
+
+.card .commenttitle {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 1px solid #f1f1f1;
+  font-weight: 700;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.card .commenttitle::after {
+  content: '';
+  width: 8ch;
+  height: 1px;
+  position: absolute;
+  bottom: -1px;
+  background-color: #47484b;
+}
+
+.comments {
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.comment-react {
+  width: 35px;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: auto;
+  margin: 0;
+  background-color: rgb(24 27 32);
+  border-radius: 5px;
+}
+
+.comment-react button {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+
+.comment-react button:after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: -2.5px;
+  top: -2.5px;
+  background-color: #f5356e;
+  border-radius: 50%;
+  z-index: 0;
+  transform: scale(0);
+}
+
+.comment-react button svg {
+  position: relative;
+  z-index: 9;
+}
+
+.comment-react button:hover:after {
+  animation: ripple 0.6s ease-in-out forwards;
+}
+
+.comment-react button:hover svg {
+  fill: #f5356e;
+}
+
+.comment-react button:hover svg path {
+  stroke: #f5356e;
+  fill: #f5356e;
+}
+
+.comment-react hr {
+  width: 80%;
+  height: 1px;
+  background-color: #dfe1e6;
+  margin: auto;
+  border: 0;
+}
+
+.comment-react span {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.comment-container {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
-  border: 1px solid lightgray;
-  font-family: Arial, Helvetica, sans-serif;
-
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
 }
 
-.post:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.comment-container .user {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+}
+
+.comment-container .user .user-pic {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+}
+
+.comment-container .user .user-pic:after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 50%;
+  background-color: #0fc45a;
+  border: 2px solid #ffffff;
+}
+
+.comment-container .user .user-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+}
+
+.comment-container .user .user-info span {
+  font-weight: 700;
+  font-size: 12px;
+  color: #47484b;
+}
+
+.comment-container .user .user-info p {
+  font-weight: 600;
+  font-size: 10px;
+  color: #acaeb4;
+}
+
+.comment-container .comment-content {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.text-box {
+  width: 100%;
+  height: fit-content;
+  background-color: rgb(24 27 32);
+  padding: 8px;
+}
+
+.text-box .box-container {
+  background-color: rgb(24 27 32);
+  border-radius: 8px 8px 21px 21px;
+  padding: 8px;
+}
+
+.text-box textarea {
+  width: 100%;
+  height: 40px;
+  resize: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 12px 12px 10px 12px;
+  font-size: 13px;
+  outline: none;
+  caret-color: #0a84ff;
+  color: #ffffff;
+  background-color: rgb(24 27 32);
+}
+
+.text-box .formatting {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto 1fr;
+}
+
+.text-box .formatting button {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 0;
+  outline: none;
+}
+
+.text-box .formatting button:hover {
+  background-color: #f1f1f1;
+}
+
+.text-box .formatting .send {
+  width: 30px;
+  height: 30px;
+  background-color: #0a84ff;
+  margin: 0 0 0 auto;
+}
+
+.text-box .formatting .send:hover {
+  background-color: #026eda;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/*Home Page Card*/
+.post-card {
+  width: 320px;
+  background: lightgrey;
+  background-color: rgb(24 27 32);
+  border: 1px solid rgb(84 90 106);
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  margin: 10px 10px 10px 0;
+  display: flex;
+  position: relative;
+}
+.commentButton {
+  /* Add common styles for the like button */
+  background-color: transparent;
+  color: #ffffff; /* Adjust the color as needed */
+  padding: 50px; /* Adjust the padding as needed */
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
+  font-size: 12px; /* Adjust the font size as needed */
+  
 }
-.post .title {
-  flex: 20%;
-  border-bottom: 1px solid lightgray;
-  background-color: dodgerblue;
-  display: grid;
-  place-content: center;
-  color: white;
+.likesLength{
+  color: #ff0000;
 }
-
-.post .body {
-  flex: 60%;
-  display: grid;
-  place-content: center;
-}
-
-.post .footer {
-  flex: 20%;
-  border-top: 1px solid lightgray;
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-  background-color: dodgerblue;
-  color: white;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.footer .username {
-  flex: 50%;
-}
-.footer .buttons {
-  flex: 50%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.unlikeBttn {
+  /* Styles for the unlike button */
+  background-color: transparent;
+  color: #ffffff; /* Adjust the color as needed */
+  padding: 50px; /* Adjust the padding as needed */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px; /* Adjust the font size as needed */
 }
 
 .likeBttn {
-  color: rgba(250, 250, 250, 0.8);
-}
-.unlikeBttn {
-  color: white;
+    /* Add common styles for the like button */
+  background-color: transparent;
+  color: #ff0000; /* Adjust the color as needed */
+  padding: 50px; /* Adjust the padding as needed */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px; /* Adjust the font size as needed */
 }
 
-.buttons label {
-  margin-right: 20px;
-  margin-left: 10px;
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: blueviolet;
+  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
 }
 
+.post-card .title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: all .35s ease-in;
+}
+.title:hover {
+  text-decoration: underline blueviolet;
+}
+
+
+.datetime {
+  font-size: 12px;
+  color: rgb(168 179 207);
+  margin: 10px 0;
+}
+
+.image-preview {
+  position: relative;
+  border-radius: 20px;
+  margin-bottom: 4px;
+  overflow: hidden; /* Ensures that the image won't overflow its container */
+}
+
+.image-preview img {
+  display: block;
+  width: 100%;
+  height: auto; /* Allows the image to maintain its aspect ratio */
+  border-radius: 20px;
+  object-fit: cover; /* Ensures the image covers the entire container */
+}
+
+.comment-like {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.comment-like span {
+  cursor: pointer;
+  height: 40px;
+  width: 50px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: all .15s ease;
+}
+
+.comment-like span:hover {
+  background-color: rgba(137, 43, 226, 0.096);
+}
+
+.comment-like span svg {
+  fill: rgb(255, 255, 255);
+  margin-right: 2px;
+}
 /* CREATE POST PAGE CSS */
 
 .createPostPage {
@@ -326,141 +636,70 @@ button {
   font-size: 25px;
 }
 
-/* Media items*/
-.card {
-  overflow: visible;
-  position: relative;
-  width: 190px;
-  height: 254px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
-  
-  
-}
-.icons {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  position: absolute;
-  right: 1px;
-  top: 10px;
-  transition: opacity 0.5s ease;
-  opacity: 0;
-}
-.card:before,
-.card:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  background: #fff;
-  transition: 0.5s;
-  z-index: -99;
-}
-.save {
-  background: #38bbeb;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  width: 60px;
-  height: 25px;
-}
-.imgbox .img .imagesize {
-  max-width: 100%; /* Maksimum genişlik, üst sınırla sınırlı */
-  max-height: 100%; /* Maksimum yükseklik, üst sınırla sınırlı */
-  width: 100%; /* Genişlik tamamen dolduracak şekilde ayarlanacak */
-  height: 100%; /* Yükseklik tamamen dolduracak şekilde ayarlanacak */
-  position: absolute; /* Resim boyutlarına göre konumlandırmak için */
-  top: 0;
-  left: 0;
-}
 
 
-.save {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 5px;
-  padding: 5px;
-}
 
-.save__icon {
-  width: 15px;
-  fill: white;
-}
 
-.details {
-  position: absolute;
-  left: -10px;
-  right: 0;
-  bottom: 5px;
-  height: 60px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/*Image*/
-.imgbox {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  background: #222;
-  transition: 0.5s;
-  z-index: 1;
-}
-
-.img {
-  background: #4158D0;
-  background-image: linear-gradient(45deg, #4158D0, #C850C0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/*Text*/
-.title {
-  font-weight: 600;
-  font-size: 15px;
-  color: #777;
-}
-
-.caption {
-  font-weight: 500;
-  font-size: 12px;
-  color: #4158D0;
-  display: block;
-  margin-top: 5px;
-}
-
-/*Hover*/
-.card:hover .imgbox {
-  bottom: 80px;
-}
-.card:hover .icons {
-  z-index: 2;
-  opacity: 1;
-}
-
-.card:hover:before {
-  transform: rotate(20deg);
-}
-
-.card:hover:after {
-  transform: rotate(10deg);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, .2);
-}
 
 
 
 
 /* LOGIN */
+/*password*/
+.group {
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: -100px;
+}
+
+.input {
+  width: 100%;
+  height: 45px;
+  line-height: 30px;
+  padding: 0 5rem;
+  padding-left:  3rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f8fafc;
+  color: #0d0c22;
+  transition: .5s ease;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.input:focus, input:hover {
+  outline: none;
+  border-color: rgba(129, 140, 248);
+  background-color: #fff;
+  box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+}
+
+.icon {
+  position: absolute;
+  left: 1rem;
+  fill: none;
+  width: 1rem;
+  height: 1rem;
+}
+.inputContainer {
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: -100px;
+}
+.usernameicon {
+  position: absolute;
+  left: 1.2rem;
+  fill: none;
+  width: 1.2rem;
+  height: 1rem;
+}
 
 .loginContainer {
   display: flex;
@@ -554,6 +793,28 @@ button {
   }
 }
 /* Register*/
+.passwordgroup{
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: -100px;
+}
+
+.usernamegroup{
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: -100px;
+}
+.emailgroup{
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: -100px;
+}
 .registrationpage {
   padding: 0;
   margin: 0;
@@ -607,11 +868,10 @@ h1 {
   background-position: top left;
 }
 .registerusericon {
-  margin-top: 25px;
   position: absolute;
-  left: 37.98rem;
+  left: 1.2rem;
   fill: none;
-  width: 2rem;
+  width: 1.2rem;
   height: 1rem;
 }
 .Registration input{
@@ -632,21 +892,17 @@ h1 {
   
 }
 .registerpasswordicon {
-  margin-top: 166px;
   position: absolute;
-  left: 37.98rem;
+  left: 1.2rem;
   fill: none;
-  width: 2rem;
+  width: 1.2rem;
   height: 1rem;
 }
 .registeremailicon {
-  background-color: #ffffff;
-  
-  margin-top: 100px;
   position: absolute;
-  left: 37.98rem;
+  left: 1.2rem;
   fill: none;
-  width: 2rem;
+  width: 1.2rem;
   height: 1rem;
 }
 
@@ -723,52 +979,5 @@ h1 {
   transform: translate(2px ,2px);
 }
 
-/*password*/
-.group {
-  display: flex;
-  line-height: 30px;
-  align-items: center;
-  position: relative;
-  max-width: -100px;
-}
 
-.input {
-  width: 100%;
-  height: 45px;
-  line-height: 30px;
-  padding: 0 5rem;
-  padding-left:  3rem;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  outline: none;
-  background-color: #f8fafc;
-  color: #0d0c22;
-  transition: .5s ease;
-}
 
-.input::placeholder {
-  color: #94a3b8;
-}
-
-.input:focus, input:hover {
-  outline: none;
-  border-color: rgba(129, 140, 248);
-  background-color: #fff;
-  box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
-}
-
-.icon {
-  position: absolute;
-  left: 1rem;
-  fill: none;
-  width: 1rem;
-  height: 1rem;
-}
-.usernameicon {
-  margin-top: 95px;
-  position: absolute;
-  left: 37.60rem;
-  fill: none;
-  width: 2rem;
-  height: 1rem;
-}
