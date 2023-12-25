@@ -31,25 +31,22 @@ function Media(props) {
   return (
     <>
     
-      <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          width: '1000px', 
-          height: '100px',
-          backgroundColor: '#f0f0f0', 
-          margin: '15px' 
-      }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={props.MediaImages} alt="test" style={{ width: '100px', height: '100px', marginRight: '10px' }} />
-            <div ><h3>{props.MediaNametext}</h3></div>
-            <div style={{ marginLeft: '15px' }}>{props.MediaType}</div>
-          </div>
+  
+<div class="mediacard">
+  <div class="media-card-details">
+  <img class="mediaimage"  src={props.MediaImages}  />
+    <p class="media-text-title">{props.MediaNametext}</p>
+    <p class="media-text-body">{props.MediaType}</p>
+  </div>
+  
+</div>
+
+          
           <div>
              
               <CreatePostModal mediaId={props.id}></CreatePostModal>
           </div>
-      </div>
+    
 
       <div style={inputStyle}>
         <input

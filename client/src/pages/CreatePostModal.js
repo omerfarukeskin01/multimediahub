@@ -63,11 +63,6 @@ const CreatePostModal = (props) => {
     };
     return (
         <>
-            <Snackbar open={open} autoHideDuration={1000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'top' }}>
-                <Alert onClose={handleClose}  variant="filled" severity="success" sx={{ width: '25%' }}>
-               Successfully
-                </Alert>
-            </Snackbar>
             <Button type="primary" onClick={showModal}>
                 Share
             </Button>
@@ -82,7 +77,7 @@ const CreatePostModal = (props) => {
 
                     >
                         <Form className="">
-
+                    
                             <label>Post: </label>
                             <ErrorMessage name="postText" component="span" />
                             <Field
