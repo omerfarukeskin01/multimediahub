@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { PostComments } = require("../models/");
+const { PostComments ,MediaComments} = require("../models/");
 const { validateToken } = require("../middlewares/AuthMiddleware");
-
+//post comment
 router.get("/:postId", async (req, res) => {
   const postId = req.params.postId;
   const comments = await PostComments.findAll({ where: { PostId: postId } });
@@ -27,6 +27,10 @@ router.delete("/:commentId", validateToken, async (req, res) => {
 
   res.json("DELETED SUCCESSFULLY");
 });
-
-
+//Media comment
+router.get("/:mediaId", async (req, res) => {
+  const mediaId = req.params.mediaId;
+  const comments = await MediaComments.findAll({ where: { MediaId: mediaId } });
+  res.json(comments);
+});
 module.exports = router;
