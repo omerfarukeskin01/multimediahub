@@ -13,10 +13,16 @@ function PostShow(props) {
   const [likedPosts, setLikedPosts] = useState([]);
 
   const navigate = useNavigate();
+  const handleButtonClick = (postId) => {
+    setSelectedPostId(postId);
+    setShowForm(!showForm);
+    
+  };
   useEffect(() => {
+    
 
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/comments/${selectedPostId}`).then((response) => {
       setComments(response.data);
     });
     // Beğenilen postların ID'lerini sunucudan al
@@ -26,18 +32,19 @@ function PostShow(props) {
       const likedPostIds = response.data.likedPosts.map(like => like.PostId);
       setLikedPosts(likedPostIds);
     });
-  }, []);
+  }, [selectedPostId]);
 
 
   
 
   const addComment = () => {
+    console.log(selectedPostId)
     axios
       .post(
         "http://localhost:3001/comments",
         {
           commentBody: newComment,
-          PostId: id,
+          PostId: selectedPostId,
         },
         {
           headers: {
@@ -77,11 +84,7 @@ function PostShow(props) {
   };
 
 
-  const handleButtonClick = (postId) => {
-    setSelectedPostId(postId);
-    setShowForm(!showForm);
-    
-  };
+
 
   const likeAPost = (postId) => {
     axios
@@ -177,11 +180,11 @@ function PostShow(props) {
                </div>
               
            {comments.map((comment, key) => {
-            return (
+            return ( 
            
               <div key={key} className="comment">
                <div key={key} className="user-info">
-                
+               
                  <span>{comment.username}</span>
                  <p>{comment.createdAt}</p>
                </div>
