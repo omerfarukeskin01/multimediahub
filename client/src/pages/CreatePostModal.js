@@ -52,7 +52,17 @@ const CreatePostModal = (props) => {
     };
     return (
         <>
-            <Button type="primary" onClick={showModal}>
+
+
+           
+    
+           
+           
+           
+           
+
+          
+                   <Button type="primary" onClick={showModal}>
                 Share
             </Button>
             <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -65,6 +75,7 @@ const CreatePostModal = (props) => {
 
                     >
                         <Form className="">
+                           
                     
                             <label>Post: </label>
                             <ErrorMessage name="postText" component="span" />

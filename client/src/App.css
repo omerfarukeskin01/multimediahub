@@ -11,22 +11,33 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Home Page comment */
-.card {
+.commentcard {
   position: absolute;
-  top: 150px;
-  right: 200px;
-  width: 300px;
-  height: fit-content;
-   background-color: rgb(24 27 32);
+  top: 3px;
+  right: -450px;
+  width: 350px;
+  height: 646px;
+  background-color: rgb(24 27 32);
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 17px 17px 27px 27px;
-  padding: 20px 25px;
-
-
+  padding: 10px 25px;
 }
 
-.card .commenttitle {
+.commentcard .commenttitle {
   width: 100%;
   height: 50px;
   position: relative;
@@ -39,7 +50,7 @@ body {
   color: #ffffff;
 }
 
-.card .commenttitle::after {
+.commentcard .commenttitle::after {
   content: '';
   width: 8ch;
   height: 1px;
@@ -53,6 +64,7 @@ body {
   grid-template-columns: 35px 1fr;
   gap: 20px;
   padding: 20px;
+  height: 439px;
 }
 
 .comment-react {
@@ -274,16 +286,17 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 20px 20px;
   margin: 10px 10px 10px 0;
   display: flex;
   position: relative;
 }
-.commentButton {
+.comment-like .commentButton {
   /* Add common styles for the like button */
+  padding: 0px;
+  margin: 2px 0px 0px 50px;
   background-color: transparent;
-  color: #ffffff; /* Adjust the color as needed */
-  padding: 50px; /* Adjust the padding as needed */
+  color: #ffffff; /* Adjust the color as needed *//* Adjust the padding as needed */
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -297,8 +310,9 @@ body {
   /* Styles for the unlike button */
   background-color: transparent;
   color: #ffffff; /* Adjust the color as needed */
-  padding: 50px; /* Adjust the padding as needed */
+  padding: 0px; /* Adjust the padding as needed */
   border: none;
+  margin: 2px 0px 0px 55px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 12px; /* Adjust the font size as needed */
@@ -308,8 +322,9 @@ body {
     /* Add common styles for the like button */
   background-color: transparent;
   color: #ff0000; /* Adjust the color as needed */
-  padding: 50px; /* Adjust the padding as needed */
+  padding: 0px; /* Adjust the padding as needed */
   border: none;
+  margin: 2px 0px 0px 55px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 12px; /* Adjust the font size as needed */
@@ -388,125 +403,71 @@ body {
   margin-right: 2px;
 }
 /* CREATE POST PAGE CSS */
-
-.createPostPage {
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100vw;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 500px;
-  height: auto;
-  padding: 20px;
-  border: 5px solid dodgerblue;
-  border-radius: 5px;
-}
-
-.formContainer #inputCreatePost {
-  height: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding-left: 10px;
-  font-size: 20px;
-}
-
-.formContainer .Button {
-  display: flex;
-}
-
-
-
-
-
-.formContainer button {
-  width: 9em;
- height: 3em;
- border-radius: 30em;
- font-size: 15px;
- font-family: inherit;
- border: none;
- position: relative;
- overflow: hidden;
- z-index: 1;
- box-shadow: 6px 6px 12px #c5c5c5,
-             -6px -6px 12px #ffffff;
- right: -1px;
-}
-
-
-
-
-
-.formContainer button::before {
-  content: '';
-  width: 0;
-  height: 3em;
-  border-radius: 30em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: .5s ease;
-  display: block;
-  z-index: -1;
+.mediacard {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
  }
- .formContainer .postButton::before {
-  background-image: linear-gradient(to left,  #8ed6ff 0%,  #ffc1c8 100%);
-  content: '';
-  width: 0;
-  height: 4em;
-  border-radius: 100em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: .5s ease;
-  display: block;
-  z-index: -1;
-}
-
-.formContainer .postButton {
-  width: 11em;
- height: 4em;
- border-radius: 30em;
- font-size: 15px;
- font-family: inherit;
- border: none;
- position: relative;
- overflow: hidden;
- z-index: 1;
- box-shadow: 6px 6px 12px #c5c5c5,
-             -6px -6px 12px #ffffff;
-  right: -140px;
-  top: 10px;
+ 
+ .media-card-details {
+  color: black;
+  height: 100%;
+  gap: .5em;
+  display: grid;
+  place-content: center;
   
-}
+ }
  
-.formContainer .filmButton::before {
-  background-image: linear-gradient(to left,  #8ed6ff 0%,  #ffc1c8 100%);
-}
-
-.formContainer .musicButton::before {
-  background-image: linear-gradient(to right, #8ed6ff 0%, #66ff66 100%);
-}
-
-.formContainer .gamesButton::before {
-  background-image: linear-gradient(to right, #8ed6ff 0%, #ffcece 100%);
-}
+ .media-card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
  
- .formContainer :hover::before {
-  width: 9em;
+ .media-text-body {
+  color: rgb(134, 134, 134);
+ }
+ 
+ /*Text*/
+ .media-text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+ }
+ 
+ /*Hover*/
+ .mediacard:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+ }
+ 
+ .mediacard:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
  }
 
-span {
-  color: red;
+.mediaimage {
+  width: 100%;
+  height: 100%; /* Adjusted height to fill the card */
+  object-fit: cover; /* or "contain" based on your preference */
+  border-radius: 20px; /* Match the border-radius of the card */
 }
+
 
 /* NAVBAR */
 
