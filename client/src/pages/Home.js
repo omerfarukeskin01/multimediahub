@@ -30,10 +30,15 @@ function Home() {
 
 
   return (
-          <PostShow listOfPosts={listOfPosts} setListOfPosts={setListOfPosts} ></PostShow>
-   
+    <>
 
+      <div className="homePage">
+          <PostShow listOfPosts={listOfPosts} setListOfPosts={setListOfPosts} ></PostShow>
+          </div>
+   
+          </>
   );
+  
 }
 
 export default Home;

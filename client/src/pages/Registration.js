@@ -38,37 +38,41 @@ function Registration() {
         validationSchema={validationSchema}
       >
         <Form className="Registration">
-          
+        <ErrorMessage name="username" component="span" />
+        <div className="usernamegroup">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="registerusericon">
     <path d="M2 22s3-2 4-3c0 0 6-6 6-9 0-4-3-7-7-7s-7 3-7 7c0 3 6 9 6 9 1 1 4 3 4 3"></path>
   </svg>
-          <ErrorMessage name="username" component="span" />
+         
           <Field class="input"
             autocomplete="off"
             id="inputCreatePost"
             name="username"
             placeholder="  Username"
           />
-          
+          </div>
+          <ErrorMessage name="Email" component="span" class="erroremail"/>
+          <div className="emailgroup">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  stroke="black" stroke-width="1.5"  class="registeremailicon">
     <path d="M22 2H2C1 2 0 3 0 4v16c0 1 1 2 2 2h20c1 0 2-1 2-2V4c0-1-1-2-2-2zM2 6l10 7 10-7M2 6l10 7 10-7" />
 </svg>
 
-          <ErrorMessage name="Email" component="span" class="erroremail"/>
+          
           <Field class="input"
             autocomplete="off"
             id="inputCreatePost"
             name="Email"
             placeholder="Your Email.."
           />
+          </div>
 
 
-
-
+          <ErrorMessage name="password" component="span" />
+          <div className="passwordgroup">
 <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="registerpasswordicon">
   <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linejoin="round" stroke-linecap="round"></path>
 </svg>
-          <ErrorMessage name="password" component="span" />
+          
           <Field class="input"
             autocomplete="off"
             type="password"
@@ -76,6 +80,7 @@ function Registration() {
             name="password"
             placeholder="Your Password..."
           />
+          </div>
 
           <button type= "submit" class="loginbutton">
           Register
