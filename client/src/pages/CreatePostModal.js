@@ -14,7 +14,7 @@ const CreatePostModal = (props) => {
     const formikRef = useRef();
     const navigate = useNavigate();
     const { authState } = useContext(AuthContext);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  
     //---------------------------------- 
     const [open, setOpen] = useState(false);//hata mesaji için
     const handleClose = (event, reason) => {
@@ -47,34 +47,26 @@ const CreatePostModal = (props) => {
             });
     };
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+  
     const handleOk = () => {
         const formData = formikRef.current.values;
         formData["MediaId"] = props.mediaId;
         onSubmit(formData)
-        setIsModalOpen(false);
+        props.setIsModalOpen(false);
         setOpen(true);
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
+        props.setIsModalOpen(false);
     };
     return (
 
         <>
-
-
-
-
-
-        
             <Button type="primary" onClick={showModal}>
                 Share
             </Button>
             <Modal  okText="Publish The Post"
-   title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+   title="Basic Modal" open={props.isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <div className="">
                     <Formik
                         innerRef={formikRef}

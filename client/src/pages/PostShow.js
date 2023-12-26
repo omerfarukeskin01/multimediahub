@@ -6,18 +6,13 @@ import { useNavigate,useParams } from 'react-router-dom';
 function PostShow(props) {
   const [showForm, setShowForm] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
-  let { id } = useParams();
   
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
 
   const navigate = useNavigate();
-  const handleButtonClick = (postId) => {
-    setSelectedPostId(postId);
-    setShowForm(!showForm);
-    
-  };
+
   useEffect(() => {
     
 
@@ -41,7 +36,7 @@ function PostShow(props) {
     console.log(selectedPostId)
     axios
       .post(
-        "http://localhost:3001/comments",
+        "http://localhost:3001/comments", 
         {
           commentBody: newComment,
           PostId: selectedPostId,
@@ -53,6 +48,7 @@ function PostShow(props) {
         }
       )
       .then((response) => {
+        
         if (response.data.error) {
           console.log(response.data.error);
         } else {
@@ -60,7 +56,7 @@ function PostShow(props) {
             commentBody: newComment,
             username: response.data.username,
           };
-          axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+          axios.get(`http://localhost:3001/comments/${selectedPostId}`).then((response) => {
             setComments(response.data);
             console.log(response.data)
           });
@@ -84,7 +80,19 @@ function PostShow(props) {
   };
 
 
-
+  const handleButtonClick = (postId) => {
+    setSelectedPostId(postId);
+    if(!showForm){ axios.get(`http://localhost:3001/comments/${postId}`).then((response) => {
+      setComments(response.data);
+      
+    });
+  
+    }
+   
+   
+    setShowForm(!showForm);
+    
+  };
 
   const likeAPost = (postId) => {
     axios
@@ -162,7 +170,7 @@ function PostShow(props) {
          
           
           
-              
+             
            {comments.map((comment, key) => {
             return ( 
               <div class="comments">
@@ -185,6 +193,7 @@ function PostShow(props) {
             
              <p class="comment-content" >
              {comment.commentBody}
+             
             </p>
           </div>
            </div>
