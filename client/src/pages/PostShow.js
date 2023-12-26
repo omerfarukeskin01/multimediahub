@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import { useNavigate,useParams } from 'react-router-dom';
-
+import { AuthContext } from "../helper/AuthContext";
 
 function PostShow(props) {
   const [showForm, setShowForm] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
-  
+  const { authState } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
@@ -20,7 +20,7 @@ function PostShow(props) {
     axios.get(`http://localhost:3001/comments/${selectedPostId}`).then((response) => {
       setComments(response.data);
     });
-    // Beğenilen postların ID'lerini sunucudan al
+  
     axios.get('http://localhost:3001/posts', {
       headers: { accessToken: localStorage.getItem("accessToken") }
     }).then(response => {
@@ -183,11 +183,20 @@ function PostShow(props) {
                     </svg>
                   </div>
                   </div>
-           
+                  {authState.username === comment.username && (
+                  <p
+                    onClick={() => {
+                      deleteComment(comment.id);
+                    }}
+                  >
+                    X
+                  </p>
+                )}
               <div key={key} className="comment">
                <div key={key} className="user-info">
                
                  <span>{comment.username}</span>
+                
                </div>
                
             
