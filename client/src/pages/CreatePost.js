@@ -36,7 +36,7 @@ function CreatePost() {
    
       {medias.map((value) => {
         return (
-          
+        
           <Media 
             MediaNametext={value.MediaNametext}
             MediaImages={value.MediaImages}

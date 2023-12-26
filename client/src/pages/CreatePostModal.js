@@ -62,7 +62,7 @@ const CreatePostModal = (props) => {
     return (
 
         <>
-          <Button type="primary" onClick={showModal}>
+            <Button type="primary" onClick={showModal}>
                 Share
             </Button>
             <Modal  okText="Publish The Post"
