@@ -23,6 +23,8 @@ body {
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 17px 17px 27px 27px;
   padding: 10px 25px;
+  max-height: 450px; /* Set a maximum height for vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
 }
 
 .commentcard .commenttitle {
@@ -52,9 +54,9 @@ body {
   grid-template-columns: 35px 1fr;
   gap: 20px;
   padding: 20px;
-  height: 439px;
-  max-height: 450px; /* Set a maximum height for vertical scrolling */
-  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+  height: 78px;
+
+  align-content: center;
 }
 
 .comment-react {
@@ -132,7 +134,15 @@ body {
 .comment-container {
   display: flex;
   flex-direction: row; /* Display comments in a row */
-  gap: 15px;
+  gap: 50px;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: row; /* Display comments in a column */
+  gap: 30px; /* Increase the gap between comments */
   padding: 0;
   margin: 0;
 }
@@ -166,23 +176,22 @@ body {
   border: 2px solid #ffffff;
 }
 
-.comment-container .comment .user-info {
+.comment-container .user-info {
   width: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 3px;
-
 }
 
-.comment-container .comment .user-info span {
+.comment-container .user-info span {
   font-weight: 700;
   font-size: 12px;
   color: #47484b;
 }
 
-.comment-container .comment .user-info p {
+.comment-container .user-info p {
   font-weight: 600;
   font-size: 10px;
   color: #acaeb4;
@@ -194,6 +203,7 @@ body {
   font-weight: 600;
   color: #ffffff;
 }
+
 
 .text-box {
   width: 100%;
