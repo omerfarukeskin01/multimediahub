@@ -5,14 +5,11 @@ function Media(props) {
 
   const [inputValue, setInputValue] = useState('');
   const [isInputVisible, setInputVisible] = useState(false);
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
 
-  const sendDataToCreatPost = () => {
-    
- 
-
-    props.handleMediaId(props.id)
-  };
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -30,31 +27,31 @@ function Media(props) {
 
   return (
     <>
-
-    <div class="wrapper">
-        <div class="card">
-            <img src= {props.MediaImages} />
-            <div class="descriptions">
-                <h1>{props.MediaNametext}</h1>
-                <p>
-                {props.MediaType}</p>
-                <button>
-                    <i class="fab fa-youtube"></i>
-                    Share
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-          
-          <div>
-          <Button type="primary" onClick={showModal}>
-                Share
-            </Button>
-              <CreatePostModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} mediaId={props.id}></CreatePostModal>
-          </div>
     
+      <div class="wrapper">
+        <div class="card">
+          <img src={props.MediaImages} />
+          <div class="descriptions">
+            <h1>{props.MediaNametext}</h1>
+            <p>
+              {props.MediaType}</p>
+            <button>
+              <i class="fab fa-youtube"></i>
+              Share
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div>
+        <Button type="primary" onClick={showModal}>
+          Share
+        </Button>
+        <CreatePostModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} mediaId={props.id}></CreatePostModal>
+      </div>
+
 
       <div style={inputStyle}>
         <input
