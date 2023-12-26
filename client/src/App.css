@@ -12,18 +12,6 @@ body {
   padding: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*Home Page comment */
 .commentcard {
   position: absolute;
@@ -65,6 +53,8 @@ body {
   gap: 20px;
   padding: 20px;
   height: 439px;
+  max-height: 450px; /* Set a maximum height for vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
 }
 
 .comment-react {
@@ -141,7 +131,7 @@ body {
 
 .comment-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Display comments in a row */
   gap: 15px;
   padding: 0;
   margin: 0;
@@ -176,22 +166,23 @@ body {
   border: 2px solid #ffffff;
 }
 
-.comment-container .user .user-info {
-  width: 100%;
+.comment-container .comment .user-info {
+  width: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 3px;
+
 }
 
-.comment-container .user .user-info span {
+.comment-container .comment .user-info span {
   font-weight: 700;
   font-size: 12px;
   color: #47484b;
 }
 
-.comment-container .user .user-info p {
+.comment-container .comment .user-info p {
   font-weight: 600;
   font-size: 10px;
   color: #acaeb4;
