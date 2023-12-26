@@ -5,14 +5,11 @@ function Media(props) {
 
   const [inputValue, setInputValue] = useState('');
   const [isInputVisible, setInputVisible] = useState(false);
-  
+  const [isModalOpen,setIsModalOpen]=useState(false);
+const showModal=()=>{
+  setIsModalOpen(true)
+}
 
-  const sendDataToCreatPost = () => {
-    
- 
-
-    props.handleMediaId(props.id)
-  };
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
