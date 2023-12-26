@@ -12,8 +12,6 @@ body {
   padding: 0;
 }
 
-
-
 /*Home Page comment */
 .commentcard {
   position: absolute;
@@ -55,6 +53,8 @@ body {
   gap: 20px;
   padding: 20px;
   height: 439px;
+  max-height: 450px; /* Set a maximum height for vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
 }
 
 .comment-react {
@@ -131,7 +131,7 @@ body {
 
 .comment-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Display comments in a row */
   gap: 15px;
   padding: 0;
   margin: 0;
