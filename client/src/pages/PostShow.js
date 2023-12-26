@@ -16,9 +16,6 @@ function PostShow(props) {
   useEffect(() => {
 
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
     // Beğenilen postların ID'lerini sunucudan al
     axios.get('http://localhost:3001/posts', {
       headers: { accessToken: localStorage.getItem("accessToken") }
@@ -34,7 +31,7 @@ function PostShow(props) {
   const addComment = () => {
     axios
       .post(
-        "http://localhost:3001/comments",
+        "http://localhost:3001/comments", 
         {
           commentBody: newComment,
           PostId: id,
@@ -46,6 +43,7 @@ function PostShow(props) {
         }
       )
       .then((response) => {
+        
         if (response.data.error) {
           console.log(response.data.error);
         } else {
@@ -53,7 +51,7 @@ function PostShow(props) {
             commentBody: newComment,
             username: response.data.username,
           };
-          axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+          axios.get(`http://localhost:3001/comments/${selectedPostId}`).then((response) => {
             setComments(response.data);
             console.log(response.data)
           });
@@ -79,6 +77,14 @@ function PostShow(props) {
 
   const handleButtonClick = (postId) => {
     setSelectedPostId(postId);
+    if(!showForm){ axios.get(`http://localhost:3001/comments/${postId}`).then((response) => {
+      setComments(response.data);
+      
+    });
+  
+    }
+   
+   
     setShowForm(!showForm);
     
   };
