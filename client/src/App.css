@@ -4,13 +4,62 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(100, 74, 104);
 }
 
+
+/*navbar test */
 body {
   margin: 0;
   padding: 0;
 }
+
+.menu-bar {
+  border-radius: 25px;
+  height: fit-content;
+  display: inline-flex;
+  width: 97%;
+  background-color: rgba(0, 0, 0, .4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);  
+  align-items: center;
+  padding: 0 10px;
+  margin: 50px 0 0 0;
+}
+
+.menu-bar li {
+  list-style: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 12px 16px;
+  margin: 0 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-bar li::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transition: .2s;
+  border-radius: 25px;
+}
+
+.menu-bar li:hover::before {
+  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  box-shadow: 0px 3px 20px 0px black;
+  transform: scale(1.2);
+}
+
+.menu-bar li:hover {
+  color: black;
+}
+
 
 /*Home Page comment */
 .commentcard {
@@ -437,51 +486,6 @@ body {
 
 /* NAVBAR */
 
-.navbar {
-  width: 100%;
-  height: 70px;
-  background: #5b37b7;
-  color: #010101;
-  
-  display: flex;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.navbar .links {
-  flex: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-
-.navbar .loggedInContainer {
-  flex: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.navbar a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: white;
-}
-
-.navbar .logout {
-  width: 100px;
-  height: 40px;
-  cursor: pointer;
-  margin-right: 10px;
-  background-color: white;
-}
-
-.navbar h1 {
-  text-align: right;
-  margin-right: 10px;
-  color: white;
-  font-weight: lighter;
-}
 
 /* INDIVIDUAL POST */
 .postPage {
@@ -635,7 +639,7 @@ button {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background-image: url('./image.png'); /* Yolunuza göre ayarlayın */
+  background: url('https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg') center / cover no-repeat fixed;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
   background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
@@ -750,9 +754,11 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 10vh;
+  margin-top: 100px;
+    
   
 }
-h1 {
+.registrationpage {
   position: relative;
   color: hsl(0, 0%, 0%);
   font-weight: bold;
@@ -762,7 +768,7 @@ h1 {
   border-right: 2px solid hsl(0, 0%, 80%);
   white-space: nowrap;
   animation: typewriter 4s steps(44) 1s 1 normal both,
-    blinkTextCursor 500ms infinite;
+   blinkTextCursor 500ms infinite;
 }
 
 @keyframes typewriter {
@@ -788,7 +794,7 @@ h1 {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background-image: url('./image.png'); /* Yolunuza göre ayarlayın */
+  background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg") center / cover no-repeat;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
   background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
@@ -853,6 +859,9 @@ h1 {
   transition-duration: .3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #4c9173;
+  padding: 12px 16px;
+  margin: 0 8px;
+  margin-left: 55rem;
 }
 
 /* plus sign */

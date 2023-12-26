@@ -37,7 +37,7 @@ function Login() {
  
     <div className="loginContainer">
     <div>
-      <h1 className="registrationpage">Login Page</h1>
+      <h2 className="registrationpage">Login Page</h2>
     </div>
     <div className="inputContainer">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="usernameicon">
