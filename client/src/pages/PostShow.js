@@ -159,13 +159,13 @@ function PostShow(props) {
           {showForm && selectedPostId === value.id &&(
          <div class="commentcard">
          <span class="commenttitle">Comments</span>
-         <div class="comments">
+         
           
           
               
            {comments.map((comment, key) => {
             return ( 
-
+              <div class="comments">
               <div class="comment-container">
               <div class="user">
                   <div class="user-pic">
@@ -188,10 +188,11 @@ function PostShow(props) {
             </p>
           </div>
            </div>
+            </div>
             );
           })}
           
-         </div>
+        
        
          <div class="text-box">
            <div class="box-container">
