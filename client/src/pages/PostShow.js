@@ -6,18 +6,13 @@ import { useNavigate,useParams } from 'react-router-dom';
 function PostShow(props) {
   const [showForm, setShowForm] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
-  let { id } = useParams();
   
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
 
   const navigate = useNavigate();
-  const handleButtonClick = (postId) => {
-    setSelectedPostId(postId);
-    setShowForm(!showForm);
-    
-  };
+
   useEffect(() => {
     
 
@@ -175,7 +170,7 @@ function PostShow(props) {
          <div class="comments">
           
           
-              
+             
            {comments.map((comment, key) => {
             return ( 
 
@@ -198,6 +193,7 @@ function PostShow(props) {
             
              <p class="comment-content" >
              {comment.commentBody}
+             
             </p>
           </div>
            </div>
