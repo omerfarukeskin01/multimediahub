@@ -35,10 +35,9 @@ function Media(props) {
             <h1>{props.MediaNametext}</h1>
             <p>
               {props.MediaType}</p>
-            <button>
-              <i class="fab fa-youtube"></i>
-              Share
-            </button>
+              <Button type="primary" onClick={showModal}>
+          Share
+        </Button>
           </div>
         </div>
       </div>
@@ -46,9 +45,7 @@ function Media(props) {
 
 
       <div>
-        <Button type="primary" onClick={showModal}>
-          Share
-        </Button>
+        
         <CreatePostModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} mediaId={props.id}></CreatePostModal>
       </div>
 
