@@ -8,9 +8,6 @@ function Media(props) {
   
 
   const sendDataToCreatPost = () => {
-    
- 
-
     props.handleMediaId(props.id)
   };
   const handleInputChange = (event) => {
@@ -30,16 +27,22 @@ function Media(props) {
 
   return (
     <>
-    
-  
-<div class="mediacard">
-  <div class="media-card-details">
-  <img class="mediaimage"  src={props.MediaImages}  />
-    <p class="media-text-title">{props.MediaNametext}</p>
-    <p class="media-text-body">{props.MediaType}</p>
-  </div>
-  
-</div>
+
+    <div class="wrapper">
+        <div class="card">
+            <img src= {props.MediaImages} />
+            <div class="descriptions">
+                <h1>{props.MediaNametext}</h1>
+                <p>
+                {props.MediaType}</p>
+                <button>
+                    <i class="fab fa-youtube"></i>
+                    Share
+                </button>
+            </div>
+        </div>
+    </div>
+
 
           
           <div>

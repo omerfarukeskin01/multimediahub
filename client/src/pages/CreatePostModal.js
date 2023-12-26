@@ -62,7 +62,14 @@ const CreatePostModal = (props) => {
         setIsModalOpen(false);
     };
     return (
+
         <>
+
+
+
+
+
+        
             <Button type="primary" onClick={showModal}>
                 Share
             </Button>
