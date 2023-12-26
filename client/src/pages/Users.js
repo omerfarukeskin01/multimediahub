@@ -5,7 +5,7 @@ import { AuthContext } from "../helper/AuthContext";
 import PostShow from "./PostShow";
 import ProfileCard from "./ProfileCard";
 
-function Profile() {
+function Users() {
   let { id } = useParams();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ function Profile() {
   const [followedList, setFollowedList] = useState([]);
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
-
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     console.log(
       "giriş: ",
@@ -21,6 +21,14 @@ function Profile() {
       " ",
       localStorage.getItem("accessToken")
     );
+    axios
+      .get(`http://localhost:3001/auth/users`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setUserList(response.data);
+        console.log(response.data);
+      });
     axios
       .get(`http://localhost:3001/auth/auth`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -50,23 +58,21 @@ function Profile() {
         setUsername(response.data?.username);
         setUser(response?.data);
       });
-
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
       setListOfPosts(response.data);
     });
-    console.log("followedlist: ", followedList);
+    console.log("userlist: ", userList);
   }, []);
 
   return (
     <div className="profilePageContainer">
-      {followedList.map((id) => {
-        console.log(id, "==", userr.id);
+      {userList.map((userrr) => {
+        return followedList.includes(userrr.id) ? (
+          <ProfileCard user={userrr} isFollowed={true}></ProfileCard>
+        ) : (
+          <ProfileCard user={userrr} isFollowed={false}></ProfileCard>
+        );
       })}
-      {followedList.includes(userr.id) ? (
-        <ProfileCard user={userr} isFollowed={true}></ProfileCard>
-      ) : (
-        <ProfileCard user={userr} isFollowed={false}></ProfileCard>
-      )}
       <PostShow
         listOfPosts={listOfPosts}
         setListOfPosts={setListOfPosts}
@@ -87,4 +93,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Users;

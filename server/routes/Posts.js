@@ -4,7 +4,6 @@ const { Users, Posts, Likes, Medias } = require("../models");
 
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-
 router.get("/", validateToken, async (req, res) => {
   const listOfPosts = await Posts.findAll({
     include: [
@@ -12,9 +11,9 @@ router.get("/", validateToken, async (req, res) => {
       { model: Medias },
       {
         model: Users,
-        attributes: ['username']  // Sadece username alanını al
-      }
-    ]
+        attributes: ["username"], // Sadece username alanını al
+      },
+    ],
   });
 
   const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
@@ -27,10 +26,9 @@ router.get("/byId/:id", async (req, res) => {
     include: [
       {
         model: Users,
-        attributes: ['username']
-      }
-
-    ]
+        attributes: ["username"],
+      },
+    ],
   });
   res.json(post);
 });
@@ -39,7 +37,14 @@ router.get("/byuserId/:id", async (req, res) => {
   const id = req.params.id;
   const listOfPosts = await Posts.findAll({
     where: { UserId: id },
-    include: [Likes],
+    include: [
+      { model: Likes },
+      { model: Medias },
+      {
+        model: Users,
+        attributes: ["username"], // Sadece username alanını al
+      },
+    ],
   });
   res.json(listOfPosts);
 });
