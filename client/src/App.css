@@ -4,14 +4,61 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(24 27 32);
+  background-color: rgb(100, 74, 104);
 }
 
+
+/*navbar test */
 body {
   margin: 0;
   padding: 0;
 }
 
+.menu-bar {
+  border-radius: 25px;
+  height: fit-content;
+  display: inline-flex;
+  width: 97%;
+  background-color: rgba(0, 0, 0, .4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);  
+  align-items: center;
+  padding: 0 10px;
+  margin: 50px 0 0 0;
+}
+
+.menu-bar li {
+  list-style: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 12px 16px;
+  margin: 0 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-bar li::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transition: .2s;
+  border-radius: 25px;
+}
+
+.menu-bar li:hover::before {
+  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  box-shadow: 0px 3px 20px 0px black;
+  transform: scale(1.2);
+}
+
+.menu-bar li:hover {
+  color: black;
+}
 
 
 /*Home Page comment */
@@ -25,6 +72,8 @@ body {
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 17px 17px 27px 27px;
   padding: 10px 25px;
+  max-height: 450px; /* Set a maximum height for vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
 }
 
 .commentcard .commenttitle {
@@ -54,85 +103,25 @@ body {
   grid-template-columns: 35px 1fr;
   gap: 20px;
   padding: 20px;
-  height: 439px;
+  height: 78px;
+
+  align-content: center;
 }
 
-.comment-react {
-  width: 35px;
-  height: fit-content;
-  display: grid;
-  grid-template-columns: auto;
+
+
+.comment-container {
+  display: flex;
+  flex-direction: row; /* Display comments in a row */
+  gap: 50px;
+  padding: 0;
   margin: 0;
-  background-color: rgb(24 27 32);
-  border-radius: 5px;
-}
-
-.comment-react button {
-  width: 35px;
-  height: 35px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: 0;
-  outline: none;
-}
-
-.comment-react button:after {
-  content: '';
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: -2.5px;
-  top: -2.5px;
-  background-color: #f5356e;
-  border-radius: 50%;
-  z-index: 0;
-  transform: scale(0);
-}
-
-.comment-react button svg {
-  position: relative;
-  z-index: 9;
-}
-
-.comment-react button:hover:after {
-  animation: ripple 0.6s ease-in-out forwards;
-}
-
-.comment-react button:hover svg {
-  fill: #f5356e;
-}
-
-.comment-react button:hover svg path {
-  stroke: #f5356e;
-  fill: #f5356e;
-}
-
-.comment-react hr {
-  width: 80%;
-  height: 1px;
-  background-color: #dfe1e6;
-  margin: auto;
-  border: 0;
-}
-
-.comment-react span {
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
 }
 
 .comment-container {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row; /* Display comments in a column */
+  gap: 30px; /* Increase the gap between comments */
   padding: 0;
   margin: 0;
 }
@@ -166,23 +155,22 @@ body {
   border: 2px solid #ffffff;
 }
 
-.comment-container .comment .user-info {
+.comment-container .user-info {
   width: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 3px;
-
 }
 
-.comment-container .comment .user-info span {
+.comment-container .user-info span {
   font-weight: 700;
   font-size: 12px;
   color: #47484b;
 }
 
-.comment-container .comment .user-info p {
+.comment-container .user-info p {
   font-weight: 600;
   font-size: 10px;
   color: #acaeb4;
@@ -194,6 +182,7 @@ body {
   font-weight: 600;
   color: #ffffff;
 }
+
 
 .text-box {
   width: 100%;
@@ -371,6 +360,11 @@ body {
   padding: 2px 0;
 }
 
+.sex{
+  display: flex;
+  flex-direction: row;
+}
+
 .comment-like span {
   cursor: pointer;
   height: 40px;
@@ -394,119 +388,104 @@ body {
   margin-right: 2px;
 }
 /* CREATE POST PAGE CSS */
-.mediacard {
-  width: 190px;
-  height: 254px;
-  border-radius: 20px;
-  background: #f5f5f5;
+.wrapper {
   position: relative;
-  padding: 1.8rem;
-  border: 2px solid #c3c6ce;
-  transition: 0.5s ease-out;
-  overflow: visible;
- }
- 
- .media-card-details {
-  color: black;
-  height: 100%;
-  gap: .5em;
-  display: grid;
-  place-content: center;
-  
- }
- 
- .media-card-button {
-  transform: translate(-50%, 125%);
-  width: 60%;
-  border-radius: 1rem;
-  border: none;
-  background-color: #008bf8;
-  color: #fff;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  position: absolute;
+  top: 50%;
   left: 50%;
-  bottom: 0;
-  opacity: 0;
-  transition: 0.3s ease-out;
- }
- 
- .media-text-body {
-  color: rgb(134, 134, 134);
- }
- 
- /*Text*/
- .media-text-title {
-  font-size: 1.5em;
-  font-weight: bold;
- }
- 
- /*Hover*/
- .mediacard:hover {
-  border-color: #008bf8;
-  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
- }
- 
- .mediacard:hover .card-button {
-  transform: translate(-50%, 50%);
-  opacity: 1;
- }
-
-.mediaimage {
+  transform: translate(-50%, -50%);
   width: 100%;
-  height: 100%; /* Adjusted height to fill the card */
-  object-fit: cover; /* or "contain" based on your preference */
-  border-radius: 20px; /* Match the border-radius of the card */
+  max-width: 650px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
 }
+.wrapper .card{
+  flex: 1;
+  flex-basis: 300px;
+  flex-grow: 0;
+  height: 440px;
+  background: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0px 4px 7px rgba(0,0,0,.5);
+  cursor: pointer;
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  overflow: hidden;
+  position: relative;
+}
+.wrapper .card img{
+  width: 100%;
+  height:100%;
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+}
+.descriptions{
+  position: absolute;
+  top:0px;
+  left:0px;
+  background-color: rgba(255,255,255,.7);
+  width:100%;
+  height:100%;
+  transition: all .7s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  clip-path: circle(0% at 100% 100%);
+}
+.wrapper .card:hover .descriptions{
+  left:0px;
+  transition: all .7s ease-in-out;
+  clip-path: circle(75%);
+}
+.wrapper .card:hover{
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  box-shadow: 0px 2px 3px rgba(0,0,0,.3);
+  transform: scale(.97);
+}
+.wrapper .card:hover img{
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  transform: scale(1.6) rotate(20deg);
+  filter: blur(3px);
+}
+.wrappper .card h1{
+  color: #ff3838;
+  letter-spacing: 1px;
+  margin: 0px;
+}
+.wrapper .card p{
+  line-height: 24px;
+  height: 70%;
+}
+.wrapper .card button{
+  width: fit-content;
+  height: 40px;
+  cursor: pointer;
+  border-style: none;
+  background-color: #ff3838;
+  color:#fff;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0px 2px 3px rgba(0,0,0,.4);
+  transition: all .5s ease-in-out;
+}
+.wrapper .card button:hover{
+  transform: scale(.95) translateX(-5px);
+  transition: all .5s ease-in-out;
+}
+
+@keyframes youtubeAnim{
+0%,100%{
+  color:#c9110f;
+}
+50%{
+  color:#ff0000;
+}
+}
+
 
 
 /* NAVBAR */
 
-.navbar {
-  width: 100%;
-  height: 70px;
-  background: #5b37b7;
-  color: #010101;
-  
-  display: flex;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.navbar .links {
-  flex: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-
-.navbar .loggedInContainer {
-  flex: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.navbar a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: white;
-}
-
-.navbar .logout {
-  width: 100px;
-  height: 40px;
-  cursor: pointer;
-  margin-right: 10px;
-  background-color: white;
-}
-
-.navbar h1 {
-  text-align: right;
-  margin-right: 10px;
-  color: white;
-  font-weight: lighter;
-}
 
 /* INDIVIDUAL POST */
 .postPage {
@@ -660,7 +639,7 @@ button {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background-image: url('./image.png'); /* Yolunuza göre ayarlayın */
+  background: url('https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg') center / cover no-repeat fixed;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
   background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
@@ -775,9 +754,11 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 10vh;
+  margin-top: 100px;
+    
   
 }
-h1 {
+.registrationpage {
   position: relative;
   color: hsl(0, 0%, 0%);
   font-weight: bold;
@@ -787,7 +768,7 @@ h1 {
   border-right: 2px solid hsl(0, 0%, 80%);
   white-space: nowrap;
   animation: typewriter 4s steps(44) 1s 1 normal both,
-    blinkTextCursor 500ms infinite;
+   blinkTextCursor 500ms infinite;
 }
 
 @keyframes typewriter {
@@ -813,7 +794,7 @@ h1 {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background-image: url('./image.png'); /* Yolunuza göre ayarlayın */
+  background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg") center / cover no-repeat;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
   background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
@@ -878,6 +859,9 @@ h1 {
   transition-duration: .3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #4c9173;
+  padding: 12px 16px;
+  margin: 0 8px;
+  margin-left: 55rem;
 }
 
 /* plus sign */

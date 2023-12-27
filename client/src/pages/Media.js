@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import CreatePostModal from "./CreatePostModal";
-
+import { Button } from 'antd';
 function Media(props) {
 
   const [inputValue, setInputValue] = useState('');
   const [isInputVisible, setInputVisible] = useState(false);
-  
+  const [isModalOpen,setIsModalOpen]=useState(false);
+const showModal=()=>{
+  setIsModalOpen(true)
+}
 
-  const sendDataToCreatPost = () => {
-    
- 
-
-    props.handleMediaId(props.id)
-  };
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -31,22 +28,27 @@ function Media(props) {
   return (
     <>
     
-  
-<div class="mediacard">
-  <div class="media-card-details">
-  <img class="mediaimage"  src={props.MediaImages}  />
-    <p class="media-text-title">{props.MediaNametext}</p>
-    <p class="media-text-body">{props.MediaType}</p>
-  </div>
-  
-</div>
-
-          
-          <div>
-             
-              <CreatePostModal mediaId={props.id}></CreatePostModal>
+      <div class="wrapper">
+        <div class="card">
+          <img src={props.MediaImages} />
+          <div class="descriptions">
+            <h1>{props.MediaNametext}</h1>
+            <p>
+              {props.MediaType}</p>
+              <Button type="primary" onClick={showModal}>
+          Share
+        </Button>
           </div>
-    
+        </div>
+      </div>
+
+
+
+      <div>
+        
+        <CreatePostModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} mediaId={props.id}></CreatePostModal>
+      </div>
+
 
       <div style={inputStyle}>
         <input

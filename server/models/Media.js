@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     Media.belongsTo(models.Users);
     Media.hasMany(models.Posts);
     Media.hasOne(models.FilmDetails);
+    Media.hasMany(models.MediaComments);
   };
   return Media;
 };

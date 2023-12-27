@@ -30,7 +30,7 @@ function Registration() {
    
     <div className="registerpage">
     <div>
-      <h1 className="registrationpage">Registration Page</h1>
+      <h2 className="registrationpage">Registration Page</h2>
     </div>
       <Formik
         initialValues={initialValues}

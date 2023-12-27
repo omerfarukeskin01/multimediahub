@@ -33,10 +33,10 @@ function CreatePost() {
  
   return (
     <>
-   
+   <div className="sex">
       {medias.map((value) => {
         return (
-          
+        
           <Media 
             MediaNametext={value.MediaNametext}
             MediaImages={value.MediaImages}
@@ -45,8 +45,11 @@ function CreatePost() {
           ></Media>
         );
       })}
+      </div>
     </>
+
   );
+
 }
 
 export default CreatePost;

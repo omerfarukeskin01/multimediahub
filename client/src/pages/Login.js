@@ -33,7 +33,7 @@ function Login() {
     <>
       <div className="loginContainer">
         <div>
-          <h1 className="registrationpage">Login Page</h1>
+          <h2 className="registrationpage">Login Page</h2>
         </div>
         <div className="inputContainer">
           <svg
