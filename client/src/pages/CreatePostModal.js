@@ -65,6 +65,7 @@ const CreatePostModal = (props) => {
            <Snackbar open={open} autoHideDuration={1000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'top' }}>
                 <Alert onClose={handleClose}  variant="filled" severity="success" sx={{ width: '25%' }}>
                Successfully
+          
                 </Alert>
             </Snackbar> 
             <Modal  okText="Publish The Post"
