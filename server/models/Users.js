@@ -17,6 +17,16 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Likes, {
       onDelete: "cascade",
     });
+    User.belongsToMany(models.Users, {
+      through: "Followers",
+      as: "followed",
+      foreignKey: "followedid",
+    });
+    User.belongsToMany(models.Users, {
+      through: "Followers",
+      as: "follower",
+      foreignKey: "followerid",
+    });
     User.hasMany(models.Medias);
     User.hasMany(models.Posts);
     User.hasMany(models.FilmDetails);
