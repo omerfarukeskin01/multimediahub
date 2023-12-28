@@ -60,6 +60,7 @@ router.put("/changepassword", validateToken, async (req, res) => {
   });
 });
 
+
 router.get("/follower/:uid", validateToken, async (req, res) => {
   //idsi gönderilen kullanıcıyı takip edenler
   const id = req.params.uid;
