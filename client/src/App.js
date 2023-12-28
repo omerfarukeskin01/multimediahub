@@ -98,6 +98,9 @@ function App() {
                   {" "}
                   <li>Profile</li>
                 </Link>
+                <Link to="/users">
+                  <li>users</li>
+                </Link>
               </>
             )}
 
