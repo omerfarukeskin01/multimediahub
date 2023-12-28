@@ -86,8 +86,8 @@ function App() {
             
               {!authState.status ? (
                 <>
-                  <li><Link to="/login"> Login</Link></li>
-                  <li><Link to="/registration"> Registration</Link></li>
+                  <Link to="/login"><li> Login</li></Link>
+                  <Link to="/registration"><li> Registration</li></Link>
                 </>
               ) : (
                 <>
