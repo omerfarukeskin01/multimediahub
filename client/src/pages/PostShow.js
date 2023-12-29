@@ -10,7 +10,7 @@ function PostShow(props) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
-  const [username, setUsername] = useState([]);
+  const [usernames, setUsernames] = useState([]);
 
   const navigate = useNavigate();
 
@@ -28,6 +28,7 @@ function PostShow(props) {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
+       
         const likedPostIds = response.data.likedPosts.map(
           (like) => like.PostId
         );
@@ -142,7 +143,7 @@ function PostShow(props) {
             <div className="post-username"     onClick={() => {
                   navigate(`/profile/${value.UserId}`);
                 }}>
-             {value.UserId}
+             {value.User?.username}
             </div>
               </div>
               <a href="#" class="title">

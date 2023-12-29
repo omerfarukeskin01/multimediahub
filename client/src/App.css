@@ -290,6 +290,10 @@ body {
 }
 
 /*Home Page Card*/
+
+.post-username{
+  margin: -28px 10px 12px 40px;
+}
 .post-card {
   width: 320px;
   background: lightgrey;
