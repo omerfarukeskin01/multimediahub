@@ -10,11 +10,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(31),
     },
   });
+
   Media.associate = (models) => {
+    Media.hasOne(models.GameDetails, {
+      foreignKey: "MediaID",
+    });
     Media.belongsTo(models.Users);
     Media.hasMany(models.Posts);
     Media.hasOne(models.FilmDetails);
     Media.hasMany(models.MediaComments);
+
+    Media.hasOne(models.SeriesDetails, {
+      foreignKey: "MediaID",
+    });
     Media.belongsToMany(models.Lists, {
       through: "ListMedia",
       foreignKey: "Mediaid",

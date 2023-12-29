@@ -14,8 +14,6 @@ function PostShow(props) {
 
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     axios
       .get(`http://localhost:3001/comments/${selectedPostId}`)
@@ -28,17 +26,12 @@ function PostShow(props) {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-       
         const likedPostIds = response.data.likedPosts.map(
           (like) => like.PostId
         );
         setLikedPosts(likedPostIds);
       });
   }, [selectedPostId]);
-
-
-
-  
 
   const addComment = () => {
     console.log(selectedPostId);
@@ -135,16 +128,19 @@ function PostShow(props) {
           return (
             <div key={key} class="post-card">
               <div class="avatar">
-              <img
-          className="avatar"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
-          alt="user"
-        />
-            <div className="post-username"     onClick={() => {
-                  navigate(`/profile/${value.UserId}`);
-                }}>
-             {value.User?.username}
-            </div>
+                <img
+                  className="avatar"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                  alt="user"
+                />
+                <div
+                  className="post-username"
+                  onClick={() => {
+                    navigate(`/profile/${value.UserId}`);
+                  }}
+                >
+                  {value.User?.username}
+                </div>
               </div>
               <a href="#" class="title">
                 {value.postText}
@@ -153,7 +149,7 @@ function PostShow(props) {
               <div
                 className="body"
                 onClick={() => {
-                  navigate(`/post/${value.id}`);
+                  navigate(`/mediadetail/${value.id}`);
                 }}
               >
                 <div class="image-preview">
@@ -322,8 +318,6 @@ function PostShow(props) {
                 )}
               </div>
             </div>
-
-          
           );
         })}
     </div>

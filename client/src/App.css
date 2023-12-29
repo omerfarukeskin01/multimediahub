@@ -520,11 +520,11 @@ body {
 .mediacontainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .media-card {
-  flex: 0 0 calc(100% / 6); /* Her kart 6'da 1 genişlikte */
-  margin: 20px; /* Kartlar arası boşluk */
+  flex: 0 0 280px; /* Her kart için genişlik %20 - margin */
+  margin: 10px; /* Kartlar arası boşluk */
 }
 .wrapper {
   position: relative;

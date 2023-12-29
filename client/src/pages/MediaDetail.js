@@ -3,9 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helper/AuthContext";
 
-
 function MediaDetail() {
-
   let { id } = useParams();
   const [mediaObject, setMediaObject] = useState({});
   const [comments, setComments] = useState([]);
@@ -14,11 +12,12 @@ function MediaDetail() {
   const nav = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-
-      setMediaObject(response.data);
-
-    });
+    axios
+      .get(`http://localhost:3001/medias/mediadetail/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setMediaObject(response.data);
+      });
 
     axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
@@ -69,15 +68,15 @@ function MediaDetail() {
       });
   };
   const deletePost = (id) => {
-    axios.delete(`http://localhost:3001/posts/${id}`, {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    })
+    axios
+      .delete(`http://localhost:3001/posts/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
       .then(() => {
-        nav("/")
+        nav("/");
       });
-  }
+  };
   const editPost = (option) => {
-
     if (option === "title") {
       let newTitle = prompt("Enter New Title:");
       axios.put(
@@ -109,70 +108,7 @@ function MediaDetail() {
     }
   };
 
-
-  return (
-    <div className="postPage">
-      <div className="leftSide">
-        <div className="post" id="individual">
-          <div className="title" onClick={() => {
-            
-            if (authState.username === mediaObject.User?.username) {
-
-              editPost("title");
-            }
-
-          }} > {mediaObject.title} </div>
-
-          <div className="body" onClick={() => {
-            if (authState.username === mediaObject.User?.username) {
-              editPost("body");
-            }
-
-          }}>{mediaObject.postText}</div>
-          <div className="footer">
-            {mediaObject.User?.username}
-            {authState.username === mediaObject.User?.username && (
-              <button onClick={() => deletePost(mediaObject.id)}>Delete</button>
-            )}
-          </div>
-
-        </div>
-      </div>
-      <div className="rightSide">
-        <div className="addCommentContainer">
-          <input
-            type="text"
-            placeholder="Comment..."
-            autoComplete="off"
-            value={newComment}
-            onChange={(event) => {
-              setNewComment(event.target.value);
-            }}
-          />
-          <button onClick={addComment}> Add Comment</button>
-        </div>
-        <div className="listOfComments">
-          {comments.map((comment, key) => {
-            return (
-              <div key={key} className="comment">
-                {comment.commentBody}
-                <label> Username: {comment.username}</label>
-                {authState.username === comment.username && (
-                  <button
-                    onClick={() => {
-                      deleteComment(comment.id);
-                    }}
-                  >
-                    X
-                  </button>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
+  return <></>;
 }
 
 export default MediaDetail;

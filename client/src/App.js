@@ -14,6 +14,7 @@ import Liked from "./pages/Likedd"; // Yeni bileşeni import edin
 
 import axios from "axios";
 import Users from "./pages/Users";
+import MediaDetail from "./pages/MediaDetail";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -127,6 +128,7 @@ function App() {
             <Route path="/profile/:id" exact element={<Profile />} />
             <Route path="/changepassword" exact element={<ChangePassword />} />
             <Route path="/users" exact element={<Users />} />
+            <Route path="/mediadetail/:id" exact element={<MediaDetail />} />
             <Route path="*" exact Component={PageNotFound} />
           </Routes>
         </Router>
