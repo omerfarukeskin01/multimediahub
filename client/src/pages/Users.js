@@ -6,6 +6,8 @@ import PostShow from "./PostShow";
 import ProfileCard from "./ProfileCard";
 
 function Users() {
+  let inputname;
+  const [listOfUsername,setListOfUsername]=useState([]);
   let { id } = useParams();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -13,22 +15,28 @@ function Users() {
   const [followedList, setFollowedList] = useState([]);
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
-  const [userList, setUserList] = useState([]);
+  const [Inputname, setInputUsername] = useState("");
+ 
+
   useEffect(() => {
+    console.log("udst: ", listOfUsername);
     console.log(
       "giriş: ",
       authState.id,
       " ",
       localStorage.getItem("accessToken")
     );
+    console.log(Inputname);
+    const data={username:Inputname}
     axios
-      .get(`http://localhost:3001/auth/users`, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
-      .then((response) => {
-        setUserList(response.data);
-        console.log(response.data);
-      });
+  .get(`http://localhost:3001/auth/usersearch`, { params: data })
+  .then((response) => {
+    setListOfUsername(response.data);
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error("Error fetching usernames:", error);
+  });
     axios
       .get(`http://localhost:3001/auth/auth`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -61,12 +69,21 @@ function Users() {
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
       setListOfPosts(response.data);
     });
-    console.log("userlist: ", userList);
-  }, []);
+  }, [Inputname]);
 
   return (
+
+    
     <div className="profilePageContainer">
-      {userList.map((userrr) => {
+      <div class="textInputWrapper">
+    <input placeholder="search" type="text" class="textInput" onChange={(event) => {
+        setInputUsername(event.target.value);
+      }}/ >
+</div>
+     
+      
+      
+      {listOfUsername.map((userrr) => {
         return followedList.includes(userrr.id) ? (
           <ProfileCard user={userrr} isFollowed={true}></ProfileCard>
         ) : (
