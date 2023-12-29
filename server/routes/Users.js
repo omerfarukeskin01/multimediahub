@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Users, Followers } = require("../models");
+const { Users, Followers, Posts } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
@@ -59,7 +59,6 @@ router.put("/changepassword", validateToken, async (req, res) => {
     });
   });
 });
-
 
 router.get("/follower/:uid", validateToken, async (req, res) => {
   //idsi gönderilen kullanıcıyı takip edenler
@@ -155,6 +154,21 @@ router.post("/follow/", validateToken, async (req, res) => {
       );
       res.json("ERROR");
     });
+});
+router.get("/followedposts/:id", async (req, res) => {
+  const id = req.params.id;
+  const listofFollowedposts = await Users.findByPk(id, {
+    include: [
+      {
+        model: Users,
+        as: "follower",
+        include: [Posts],
+      },
+    ],
+  }).catch((err) => res.json(err));
+  console.log("followedposts", id);
+
+  res.json(listofFollowedposts);
 });
 
 router.get("/basicinfo/:id", async (req, res) => {

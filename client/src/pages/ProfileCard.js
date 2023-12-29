@@ -6,7 +6,6 @@ import CreateListModal from "./CreateListModal";
 function ProfileCard(props) {
   const { authState } = useContext(AuthContext);
   const [user, SetUser] = useState(props.user);
-  console.log("PROOOOPPPPPSSSSSS USSEEEERRRRR IDDDDDDDD", props.user.id);
   const [isFollowed, SetIsFollowed] = useState(props.isFollowed);
   const [listOfLists, SetListOfLists] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,14 +13,15 @@ function ProfileCard(props) {
   const showModal = () => {
     setIsModalOpen(true);
   };
-
+  const handleClickOnList = (id) => {
+    props.setSelectedListid(id);
+  };
   const followUser = (userId) => {
     axios.post(
       "http://localhost:3001/auth/follow",
       { followedid: userId },
       { headers: { accessToken: localStorage.getItem("accessToken") } }
     );
-    console.log("followid:", userId);
     SetIsFollowed((old) => {
       return !old;
     });
@@ -40,14 +40,11 @@ function ProfileCard(props) {
       })
       .then((response) => {
         SetListOfLists(response.data);
-        console.log("LİSSSSSTTTSSS", response.data, "id :", props.user.id);
       });
     SetIsFollowed(props.isFollowed);
-  }, [props, props.isFollowed, isModalOpen, authState]);
+  }, [props, props.isFollowed, isModalOpen, authState, authState.id, user]);
 
-  console.log(isFollowed, " ", props.isFollowed);
   const UnFollowUser = (userId) => {
-    console.log("unfollow: ", userId);
     axios
       .delete("http://localhost:3001/auth/unfollow", {
         data: { followedid: userId },
@@ -75,7 +72,9 @@ function ProfileCard(props) {
         </p>
         <div className="buttons">
           <button className="primarycard">Message</button>
-          {authState.id !== user.id && (
+          {authState.id == props.user.id ? (
+            <div></div>
+          ) : (
             <div>
               {isFollowed ? (
                 <button
@@ -104,7 +103,11 @@ function ProfileCard(props) {
           <h6>Skills</h6>
           <ul>
             {listOfLists.map((list) => {
-              return <li>{list.listname}</li>;
+              return (
+                <li onClick={() => handleClickOnList(list.id)}>
+                  {list.listname}
+                </li>
+              );
             })}
             <li>
               {props.user.id == authState.id ? (

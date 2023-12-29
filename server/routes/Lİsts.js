@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validateToken } = require("../middlewares/AuthMiddleware");
-const { Lists, Medias } = require("../models");
+const { Lists, Medias, listmedia } = require("../models");
 const { where } = require("sequelize");
 
 router.post("/", validateToken, async (req, res) => {
@@ -11,15 +11,22 @@ router.post("/", validateToken, async (req, res) => {
   await Lists.create(list);
   res.json(list);
 });
-router.get("/:id", async (req, res) => {
-  //kullanıcının idsine göre sadece listelerini alma
-  const userid = req.params.id;
-  console.log("PARARRMMAMMMMAAAMMMMMMİD", userid);
-  const userslists = await Lists.findAll({
-    where: { userid: userid },
-  });
-  res.json(userslists);
+router.get("/getlistbylistid/:id", async (req, res) => {
+  //doğrudan medya listini ver
+  const listid = req.params.id;
+  console.log(listid, "getlistbyuseridlistid");
+
+  await Lists.findOne({
+    where: { id: listid },
+    include: [{ model: Medias }],
+  })
+    .then((response) => {
+      // console.log(response);
+      res.json(response.Medias);
+    })
+    .catch((err) => console.log(err));
 });
+
 router.post("/addmediatolist", async (req, res) => {
   //{MediaId:x,listid:y}
   await Lists.findByPk(req.body.listid)
@@ -52,6 +59,7 @@ router.post("/addmediatolist", async (req, res) => {
       res.json("ERROR");
     });
 });
+
 router.delete("/removemediafromlist", async (req, res) => {
   await Lists.findByPk(req.body.listid)
     .then((list) => {
@@ -83,5 +91,13 @@ router.delete("/removemediafromlist", async (req, res) => {
       res.json("ERROR");
     });
 });
-
+router.get("/:id", async (req, res) => {
+  //kullanıcının idsine göre sadece listelerini alma
+  const userid = req.params.id;
+  console.log("PARARRMMAMMMMAAAMMMMMMİD", userid);
+  const userslists = await Lists.findAll({
+    where: { userid: userid },
+  });
+  res.json(userslists);
+});
 module.exports = router;

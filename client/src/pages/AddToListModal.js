@@ -40,11 +40,16 @@ function AddToListModal(props) {
     setOpen(false);
   };
   //---------------------------------------------
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     axios
-      .post("http://localhost:3001/lists", data, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
+      .post(
+        "http://localhost:3001/lists/addmediatolist",
+        {
+          listid: listid,
+          MediaId: props.mediaId,
+        },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      )
       .then((response) => {
         console.log(response.data);
       });

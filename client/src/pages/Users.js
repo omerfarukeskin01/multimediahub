@@ -14,6 +14,7 @@ function Users() {
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
   const [userList, setUserList] = useState([]);
+  const [selectedListid, setSelectedListid] = useState(-1); //-1 listeleme işlemi için tıklama özelliği çalışmamalı
   useEffect(() => {
     console.log(
       "giriş: ",
@@ -68,9 +69,17 @@ function Users() {
     <div className="profilePageContainer">
       {userList.map((userrr) => {
         return followedList.includes(userrr.id) ? (
-          <ProfileCard user={userrr} isFollowed={true}></ProfileCard>
+          <ProfileCard
+            setSelectedListid={setSelectedListid}
+            user={userrr}
+            isFollowed={true}
+          ></ProfileCard>
         ) : (
-          <ProfileCard user={userrr} isFollowed={false}></ProfileCard>
+          <ProfileCard
+            setSelectedListid={setSelectedListid}
+            user={userrr}
+            isFollowed={false}
+          ></ProfileCard>
         );
       })}
       <PostShow

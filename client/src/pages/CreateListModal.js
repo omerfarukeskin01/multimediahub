@@ -27,7 +27,9 @@ function CreateListModal(props) {
     listname: "",
   };
   const validationSchema = Yup.object().shape({
-    listname: Yup.string().required("You must enter a Name for your list!"),
+    listname: Yup.string()
+      .min(1)
+      .required("You must enter a Name for your list!"),
   });
   const onSubmit = (data) => {
     axios
@@ -41,6 +43,7 @@ function CreateListModal(props) {
 
   const handleOk = () => {
     const formData = formikRef.current.values;
+
     onSubmit(formData);
     props.setIsModalOpen(false);
     setOpen(true);
