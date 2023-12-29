@@ -63,6 +63,8 @@ function CreatePost() {
 
       {/*
       <div className="test">
+
+  
         <Button onClick={previous}>Önceki</Button>
         <Button onClick={next}>Sonraki</Button>
         <Carousel ref={carouselRef} afterChange={onChange}>

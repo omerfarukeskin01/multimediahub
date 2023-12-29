@@ -4,6 +4,7 @@ const { Users, Followers } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
+const { Op } = require('sequelize');
 
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
@@ -156,7 +157,18 @@ router.post("/follow/", validateToken, async (req, res) => {
       res.json("ERROR");
     });
 });
+router.get("/usersearch", async (req, res) => {
+  const { username } = req.query;
 
+  const users = await Users.findAll({ where: { username: {
+    [Op.like]:`${username}%`
+  }
+   },limit: 5 
+   });
+
+  if (!users) res.json({ error: "User Doesn't Exist" });
+  res.json(users);
+});
 router.get("/basicinfo/:id", async (req, res) => {
   const id = req.params.id;
 

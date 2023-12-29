@@ -1,4 +1,4 @@
-.test{
+.test {
   width: 1000px;
 }
 .App {
@@ -10,21 +10,20 @@
   background-color: rgb(100, 74, 104);
 }
 
-
-/*navbar test */
 body {
   margin: 0;
   padding: 0;
 }
+/*navbar test */
 
 .menu-bar {
   border-radius: 25px;
   height: fit-content;
   display: inline-flex;
   width: 97%;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, 0.4);
   -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);  
+  backdrop-filter: blur(10px);
   align-items: center;
   padding: 0 10px;
   margin: 50px 0 0 0;
@@ -49,7 +48,7 @@ body {
   height: 100%;
   width: 100%;
   z-index: -1;
-  transition: .2s;
+  transition: 0.2s;
   border-radius: 25px;
 }
 
@@ -62,7 +61,6 @@ body {
 .menu-bar li:hover {
   color: black;
 }
-
 
 /*Home Page comment */
 /*Delete button */
@@ -104,7 +102,9 @@ body {
   width: 350px;
   height: 646px;
   background-color: rgb(24 27 32);
-  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01),
+    0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09),
+    0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 17px 17px 27px 27px;
   padding: 10px 25px;
   max-height: 450px; /* Set a maximum height for vertical scrolling */
@@ -126,7 +126,7 @@ body {
 }
 
 .commentcard .commenttitle::after {
-  content: '';
+  content: "";
   width: 8ch;
   height: 1px;
   position: absolute;
@@ -143,8 +143,6 @@ body {
 
   align-content: center;
 }
-
-
 
 .comment-container {
   display: flex;
@@ -180,7 +178,7 @@ body {
 }
 
 .comment-container .user .user-pic:after {
-  content: '';
+  content: "";
   width: 9px;
   height: 9px;
   position: absolute;
@@ -218,7 +216,6 @@ body {
   font-weight: 600;
   color: #ffffff;
 }
-
 
 .text-box {
   width: 100%;
@@ -294,7 +291,7 @@ body {
 
 /*Home Page Card*/
 
-.post-username{
+.post-username {
   margin: -28px 10px 12px 40px;
 }
 .post-card {
@@ -316,14 +313,13 @@ body {
   padding: 0px;
   margin: 2px 0px 0px 50px;
   background-color: transparent;
-  color: #ffffff; /* Adjust the color as needed *//* Adjust the padding as needed */
+  color: #ffffff; /* Adjust the color as needed */ /* Adjust the padding as needed */
   border: none;
   border-radius: 50%;
   cursor: pointer;
   font-size: 12px; /* Adjust the font size as needed */
-  
 }
-.likesLength{
+.likesLength {
   color: #ff0000;
 }
 .unlikeBttn {
@@ -339,7 +335,7 @@ body {
 }
 
 .likeBttn {
-    /* Add common styles for the like button */
+  /* Add common styles for the like button */
   background-color: transparent;
   color: #ff0000; /* Adjust the color as needed */
   padding: 0px; /* Adjust the padding as needed */
@@ -355,7 +351,7 @@ body {
   width: 35px;
   border-radius: 50%;
   background-color: blueviolet;
-  background-image: linear-gradient(to top left, blueviolet,rgb(73, 31, 112));
+  background-image: linear-gradient(to top left, blueviolet, rgb(73, 31, 112));
 }
 
 .post-card .title {
@@ -365,12 +361,11 @@ body {
   margin-top: 10px;
   color: #fff;
   text-decoration: none;
-  transition: all .35s ease-in;
+  transition: all 0.35s ease-in;
 }
 .title:hover {
   text-decoration: underline blueviolet;
 }
-
 
 .datetime {
   font-size: 12px;
@@ -400,7 +395,7 @@ body {
   padding: 2px 0;
 }
 
-.sex{
+.sex {
   display: flex;
   flex-direction: row;
 }
@@ -416,7 +411,7 @@ body {
   font-weight: 900;
   border-radius: 10px;
   background-color: transparent;
-  transition: all .15s ease;
+  transition: all 0.15s ease;
 }
 
 .comment-like span:hover {
@@ -427,15 +422,109 @@ body {
   fill: rgb(255, 255, 255);
   margin-right: 2px;
 }
+
+/*search users*/
+.textInputWrapper {
+  position: relative;
+  width: 180px;
+  margin: 12px 5px;
+  --accent-color: #a3e583;
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:before,
+.textInputWrapper:after {
+  content: "";
+  left: 0;
+  right: 0;
+  position: absolute;
+  pointer-events: none;
+  bottom: -1px;
+  z-index: 4;
+  width: 100%;
+}
+
+.textInputWrapper:focus-within:before {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:focus-within:before {
+  border-bottom: 1px solid var(--accent-color);
+  transform: scaleX(1);
+}
+
+.textInputWrapper:focus-within:after {
+  border-bottom: 2px solid var(--accent-color);
+  transform: scaleX(1);
+}
+
+.textInputWrapper:after {
+  content: "";
+  transform: scaleX(0);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  will-change: transform;
+  border-bottom: 2px solid var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.textInput::placeholder {
+  transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  opacity: 1;
+  user-select: none;
+  color: rgba(255, 255, 255, 0.582);
+}
+
+.textInputWrapper .textInput {
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 2px 5px rgb(35 35 35 / 30%);
+  max-height: 36px;
+  background-color: #252525;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 200ms;
+  transition-property: background-color;
+  color: #e8e8e8;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px;
+  width: 100%;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+}
+
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+  outline: none;
+}
+
+.textInputWrapper:focus-within .textInput,
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+  background-color: #353535;
+}
+
+.textInputWrapper:focus-within .textInput::placeholder {
+  opacity: 0;
+}
+
 /* CREATE POST PAGE CSS */
 .mediacontainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.media-card{
-   flex: 0 0 calc(100% / 6); /* Her kart 6'da 1 genişlikte */
-    margin: 20px; /* Kartlar arası boşluk */
+.media-card {
+  flex: 0 0 calc(100% / 6); /* Her kart 6'da 1 genişlikte */
+  margin: 20px; /* Kartlar arası boşluk */
 }
 .wrapper {
   position: relative;
@@ -451,101 +540,97 @@ body {
   align-items: center;
   margin-top: 100px;
 }
-.wrapper .card{
+.wrapper .card {
   flex: 1;
   flex-basis: 300px;
   flex-grow: 0;
   height: 440px;
   background: #fff;
   border: 2px solid #fff;
-  box-shadow: 0px 4px 7px rgba(0,0,0,.5);
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
   overflow: hidden;
   position: relative;
 }
-.wrapper .card img{
+.wrapper .card img {
   width: 100%;
-  height:100%;
-  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
 }
-.descriptions{
+.descriptions {
   position: absolute;
-  top:0px;
-  left:0px;
-  background-color: rgba(255,255,255,.7);
-  width:100%;
-  height:100%;
-  transition: all .7s ease-in-out;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+  transition: all 0.7s ease-in-out;
   padding: 0px;
   box-sizing: border-box;
   clip-path: circle(0% at 100% 100%);
 }
-.wrapper .card:hover .descriptions{
-  left:0px;
-  transition: all .7s ease-in-out;
+.wrapper .card:hover .descriptions {
+  left: 0px;
+  transition: all 0.7s ease-in-out;
   clip-path: circle(75%);
 }
-.wrapper .card:hover{
-  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
-  box-shadow: 0px 2px 3px rgba(0,0,0,.3);
-  transform: scale(.97);
+.wrapper .card:hover {
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  transform: scale(0.97);
 }
-.wrapper .card:hover img{
-  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+.wrapper .card:hover img {
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
   transform: scale(1.6) rotate(20deg);
   filter: blur(3px);
 }
-.wrappper .card h1{
+.wrappper .card h1 {
   color: #ff3838;
   letter-spacing: 1px;
   margin: 0px;
 }
-.wrapper .card p{
+.wrapper .card p {
   line-height: 24px;
   height: 70%;
 }
-.mediabutton{
+.mediabutton {
   display: flex;
   flex-direction: row;
   position: absolute;
   bottom: 0;
   left: 0;
-  
-  
 }
-.wrapper .card button{
-
+.wrapper .card button {
   width: fit-content;
-  
-margin-right: 30px;  height: 40px;
+
+  margin-right: 30px;
+  height: 40px;
   cursor: pointer;
   border-style: none;
   background-color: #ff3838;
-  color:#fff;
+  color: #fff;
   font-size: 15px;
   outline: none;
-  box-shadow: 0px 2px 3px rgba(0,0,0,.4);
-  transition: all .5s ease-in-out;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease-in-out;
 }
-.wrapper .card button:hover{
-  transform: scale(.95) translateX(-5px);
-  transition: all .5s ease-in-out;
-}
-
-@keyframes youtubeAnim{
-0%,100%{
-  color:#c9110f;
-}
-50%{
-  color:#ff0000;
-}
+.wrapper .card button:hover {
+  transform: scale(0.95) translateX(-5px);
+  transition: all 0.5s ease-in-out;
 }
 
-
+@keyframes youtubeAnim {
+  0%,
+  100% {
+    color: #c9110f;
+  }
+  50% {
+    color: #ff0000;
+  }
+}
 
 /* NAVBAR */
-
 
 /* INDIVIDUAL POST */
 .postPage {
@@ -627,14 +712,6 @@ button {
   font-size: 25px;
 }
 
-
-
-
-
-
-
-
-
 /* LOGIN */
 /*password*/
 .group {
@@ -650,20 +727,21 @@ button {
   height: 45px;
   line-height: 30px;
   padding: 0 5rem;
-  padding-left:  3rem;
+  padding-left: 3rem;
   border: 2px solid transparent;
   border-radius: 10px;
   outline: none;
   background-color: #f8fafc;
   color: #0d0c22;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .input::placeholder {
   color: #94a3b8;
 }
 
-.input:focus, input:hover {
+.input:focus,
+input:hover {
   outline: none;
   border-color: rgba(129, 140, 248);
   background-color: #fff;
@@ -699,10 +777,16 @@ button {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background: url('https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg') center / cover no-repeat fixed;
+  background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg")
+    center / cover no-repeat fixed;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
-  background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    1000
+  ); /* Adjust the last value (0.5) for transparency */
   background-position: top left;
 }
 
@@ -784,7 +868,7 @@ button {
   }
 }
 /* Register*/
-.passwordgroup{
+.passwordgroup {
   display: flex;
   line-height: 30px;
   align-items: center;
@@ -792,14 +876,14 @@ button {
   max-width: -100px;
 }
 
-.usernamegroup{
+.usernamegroup {
   display: flex;
   line-height: 30px;
   align-items: center;
   position: relative;
   max-width: -100px;
 }
-.emailgroup{
+.emailgroup {
   display: flex;
   line-height: 30px;
   align-items: center;
@@ -815,8 +899,6 @@ button {
   justify-content: center;
   min-height: 10vh;
   margin-top: 100px;
-    
-  
 }
 .registrationpage {
   position: relative;
@@ -828,7 +910,7 @@ button {
   border-right: 2px solid hsl(0, 0%, 80%);
   white-space: nowrap;
   animation: typewriter 4s steps(44) 1s 1 normal both,
-   blinkTextCursor 500ms infinite;
+    blinkTextCursor 500ms infinite;
 }
 
 @keyframes typewriter {
@@ -847,17 +929,23 @@ button {
     border-right-color: transparent;
   }
 }
-.registerpage{
+.registerpage {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
   height: 100vh;
   padding-top: 100px;
-  background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg") center / cover no-repeat;
+  background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg")
+    center / cover no-repeat;
   background-repeat: repeat;
   background-attachment: fixed; /* Use fixed to make the background fixed while scrolling */
-  background-color: rgba(255, 255, 255, 1000); /* Adjust the last value (0.5) for transparency */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    1000
+  ); /* Adjust the last value (0.5) for transparency */
   background-position: top left;
 }
 .registerusericon {
@@ -867,7 +955,7 @@ button {
   width: 1.2rem;
   height: 1rem;
 }
-.Registration input{
+.Registration input {
   width: 200px;
   height: 50px;
   border-radius: 8px;
@@ -882,7 +970,6 @@ button {
   height: 50vh;
   padding-top: 100px;
   margin-bottom: 20px; /* veya margin-top: 20px; */
-  
 }
 .registerpasswordicon {
   position: absolute;
@@ -899,11 +986,6 @@ button {
   height: 1rem;
 }
 
-
-
-
-
-
 /* logout */
 .Btn {
   display: flex;
@@ -916,7 +998,7 @@ button {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #4c9173;
   padding: 12px 16px;
@@ -927,7 +1009,7 @@ button {
 /* plus sign */
 .sign {
   width: 100%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -949,95 +1031,95 @@ button {
   color: white;
   font-size: 1.2em;
   font-weight: 600;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
 /* hover effect on button width */
 .Btn:hover {
   width: 125px;
   border-radius: 40px;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
 
 .Btn:hover .sign {
   width: 30%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   padding-left: 20px;
 }
 /* hover effect button's text */
 .Btn:hover .text {
   opacity: 1;
   width: 70%;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   padding-right: 10px;
 }
 /* button click effect*/
 .Btn:active {
-  transform: translate(2px ,2px);
+  transform: translate(2px, 2px);
 }
 
 .card-container {
-	background-color: #231E39;
-	border-radius: 5px;
-	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
-	color: #B3B8CD;
-	padding-top: 30px;
-	position: relative;
-	width: 320px;
-	max-width: 100%;
-	text-align: center;
+  background-color: #231e39;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  color: #b3b8cd;
+  padding-top: 30px;
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  text-align: center;
 }
 
 .card-container .pro {
-	color: #231E39;
-	background-color: #FEBB0B;
-	border-radius: 3px;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 3px 7px;
-	position: absolute;
-	top: 30px;
-	left: 30px;
+  color: #231e39;
+  background-color: #febb0b;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 3px 7px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }
 
 .card-container .round {
-	border: 1px solid #03BFCB;
-	border-radius: 50%;
-	padding: 7px;
+  border: 1px solid #03bfcb;
+  border-radius: 50%;
+  padding: 7px;
   height: 120px;
 }
 .skills {
-	background-color: #1F1A36;
-	text-align: left;
-	padding: 15px;
-	margin-top: 30px;
+  background-color: #1f1a36;
+  text-align: left;
+  padding: 15px;
+  margin-top: 30px;
 }
 
 .skills ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .skills ul li {
-	border: 1px solid #2D2747;
-	border-radius: 2px;
-	display: inline-block;
-	font-size: 12px;
-	margin: 0 7px 7px 0;
-	padding: 7px;
+  border: 1px solid #2d2747;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  margin: 0 7px 7px 0;
+  padding: 7px;
 }
 
 button.primarycard {
-	background-color: #03BFCB;
-	border: 1px solid #03BFCB;
-	border-radius: 3px;
-	color: #231E39;
-	font-family: Montserrat, sans-serif;
-	font-weight: 500;
-	padding: 10px 25px;
+  background-color: #03bfcb;
+  border: 1px solid #03bfcb;
+  border-radius: 3px;
+  color: #231e39;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  padding: 10px 25px;
 }
 
 button.primary.ghost {
-	background-color: transparent;
-	color: #02899C;
+  background-color: transparent;
+  color: #02899c;
 }
