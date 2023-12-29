@@ -49,6 +49,7 @@ function Profile() {
       .then((response) => {
         setUsername(response.data?.username);
         setUser(response?.data);
+        console.log("KULLANICININ İDSİİİİİ", response.data.id);
       });
 
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
@@ -60,7 +61,7 @@ function Profile() {
   return (
     <div className="profilePageContainer">
       {followedList.map((id) => {
-        console.log(id, "==", userr.id);
+        console.log(id, "9999999999", userr.id);
       })}
       {followedList.includes(userr.id) ? (
         <ProfileCard user={userr} isFollowed={true}></ProfileCard>

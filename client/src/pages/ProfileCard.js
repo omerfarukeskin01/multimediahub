@@ -2,10 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "../helper/AuthContext";
+import CreateListModal from "./CreateListModal";
 function ProfileCard(props) {
   const { authState } = useContext(AuthContext);
-  const user = props.user;
+  const [user, SetUser] = useState(props.user);
+  console.log("PROOOOPPPPPSSSSSS USSEEEERRRRR IDDDDDDDD", props.user.id);
   const [isFollowed, SetIsFollowed] = useState(props.isFollowed);
+  const [listOfLists, SetListOfLists] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loggedUser, setLoggedUser] = useState({});
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   const followUser = (userId) => {
     axios.post(
@@ -19,8 +27,23 @@ function ProfileCard(props) {
     });
   };
   useEffect(() => {
+    axios
+      .get(`http://localhost:3001/auth/auth`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        setLoggedUser(response.data);
+      });
+    axios
+      .get(`http://localhost:3001/lists/${props.user.id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        SetListOfLists(response.data);
+        console.log("LİSSSSSTTTSSS", response.data, "id :", props.user.id);
+      });
     SetIsFollowed(props.isFollowed);
-  }, [props.isFollowed]);
+  }, [props, props.isFollowed, isModalOpen, authState]);
 
   console.log(isFollowed, " ", props.isFollowed);
   const UnFollowUser = (userId) => {
@@ -80,15 +103,31 @@ function ProfileCard(props) {
         <div className="skills">
           <h6>Skills</h6>
           <ul>
-            <li>UI / UX</li>
-            <li>Front End Development</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node</li>
+            {listOfLists.map((list) => {
+              return <li>{list.listname}</li>;
+            })}
+            <li>
+              {props.user.id == authState.id ? (
+                <button
+                  onClick={() => {
+                    showModal();
+                  }}
+                  className="primary ghost"
+                >
+                  add new list
+                </button>
+              ) : (
+                <div></div>
+              )}
+            </li>
           </ul>
         </div>
+      </div>
+      <div>
+        <CreateListModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        ></CreateListModal>
       </div>
     </div>
   );

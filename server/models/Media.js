@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     Media.hasMany(models.Posts);
     Media.hasOne(models.FilmDetails);
     Media.hasMany(models.MediaComments);
+    Media.belongsToMany(models.Lists, {
+      through: "ListMedia",
+      foreignKey: "Mediaid",
+    });
   };
   return Media;
 };
