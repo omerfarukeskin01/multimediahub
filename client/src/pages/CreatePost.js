@@ -48,6 +48,20 @@ function CreatePost() {
 
   return (
     <>
+      <div className="mediacontainer">
+        {medias.map((value) => (
+          <div key={value.id} className="media-card">
+            <Media
+              MediaNametext={value.MediaNametext}
+              MediaImages={value.MediaImages}
+              MediaType={value.MediaType}
+              id={value.id}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/*
       <div className="test">
         <Button onClick={previous}>Önceki</Button>
         <Button onClick={next}>Sonraki</Button>
@@ -63,7 +77,7 @@ function CreatePost() {
             </div>
           ))}
         </Carousel>
-      </div>
+      </div>*/}
     </>
   );
 }

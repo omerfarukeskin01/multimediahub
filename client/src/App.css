@@ -428,11 +428,20 @@ body {
   margin-right: 2px;
 }
 /* CREATE POST PAGE CSS */
+.mediacontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.media-card{
+   flex: 0 0 calc(100% / 6); /* Her kart 6'da 1 genişlikte */
+    margin: 20px; /* Kartlar arası boşluk */
+}
 .wrapper {
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -20%);
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 0%);
   width: 100%;
   max-width: 650px;
   height: auto;
@@ -468,7 +477,7 @@ body {
   width:100%;
   height:100%;
   transition: all .7s ease-in-out;
-  padding: 20px;
+  padding: 0px;
   box-sizing: border-box;
   clip-path: circle(0% at 100% 100%);
 }
@@ -496,9 +505,20 @@ body {
   line-height: 24px;
   height: 70%;
 }
+.mediabutton{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  
+  
+}
 .wrapper .card button{
+
   width: fit-content;
-  height: 40px;
+  
+margin-right: 30px;  height: 40px;
   cursor: pointer;
   border-style: none;
   background-color: #ff3838;
