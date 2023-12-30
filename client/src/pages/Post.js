@@ -12,6 +12,7 @@ function Post() {
   const [newComment, setNewComment] = useState("");
   const { authState } = useContext(AuthContext);
   const nav = useNavigate();
+  
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
