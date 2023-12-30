@@ -16,6 +16,7 @@ function Users() {
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
   const [Inputname, setInputUsername] = useState("");
+  const [selectedListid, setSelectedListid] = useState(0); //0 is posts
 
   useEffect(() => {
     console.log("udst: ", listOfUsername);
@@ -82,12 +83,20 @@ function Users() {
           }}
         />
       </div>
-
+      {console.log(userr)}
       {listOfUsername.map((userrr) => {
         return followedList.includes(userrr.id) ? (
-          <ProfileCard user={userrr} isFollowed={true}></ProfileCard>
+          <ProfileCard
+            setSelectedListid={setSelectedListid}
+            user={userrr}
+            isFollowed={true}
+          ></ProfileCard>
         ) : (
-          <ProfileCard user={userrr} isFollowed={false}></ProfileCard>
+          <ProfileCard
+            setSelectedListid={setSelectedListid}
+            user={userrr}
+            isFollowed={false}
+          ></ProfileCard>
         );
       })}
       <PostShow

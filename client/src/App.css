@@ -515,7 +515,15 @@ body {
 .textInputWrapper:focus-within .textInput::placeholder {
   opacity: 0;
 }
-
+/*media detay page*/
+.custom-img {
+  width: 288px;
+  height: 414px;
+  object-fit: cover; /* Görüntünün oranını koruyarak kaplamasını sağlar */
+}
+.container .as {
+  background-color: #0fc45a;
+}
 /* CREATE POST PAGE CSS */
 .mediacontainer {
   display: flex;

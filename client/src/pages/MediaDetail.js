@@ -108,7 +108,32 @@ function MediaDetail() {
     }
   };
 
-  return <></>;
+  return (
+    <>
+      <div class="container as">
+        <div className="row">
+          <div className="col-4">
+            <div className="row justify-content-center">
+              <img
+                src={mediaObject?.MediaImages}
+                className="custom-img"
+                alt="description"
+              ></img>
+            </div>
+            <div className="row text-center">
+              <div className="col-12">
+                <h1>{mediaObject?.MediaNametext}</h1>
+                <p>{mediaObject?.MediaType}</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-8 bg-secondary d-flex align-items-center justify-content-center">
+            b
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default MediaDetail;
