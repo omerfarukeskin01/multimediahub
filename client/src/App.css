@@ -26,7 +26,7 @@ body {
   backdrop-filter: blur(10px);
   align-items: center;
   padding: 0 10px;
-  margin: 50px 0 0 0;
+  margin: 20px 0 0 0;
 }
 
 .menu-bar li {
@@ -517,13 +517,12 @@ body {
 }
 /*media detay page*/
 .custom-img {
-  width: 288px;
-  height: 414px;
-  object-fit: cover; /* Görüntünün oranını koruyarak kaplamasını sağlar */
+  width: 100%; /* Genişliği konteynerin genişliğine sığdır */
+  height: auto; /* Yüksekliği orantılı olarak ayarla */
+  max-height: 200px; /* Maksimum yükseklik sınırlaması */
+  object-fit: cover; /* Resmi keserek sınırlara sığdır */
 }
-.container .as {
-  background-color: #0fc45a;
-}
+
 /* CREATE POST PAGE CSS */
 .mediacontainer {
   display: flex;

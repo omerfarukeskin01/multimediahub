@@ -84,8 +84,15 @@ function CreatePost() {
         <p>{error}</p> // Hata mesajını göster
       ) : (
         <div className="mediacontainer">
+          {console.log(medias)}
           {medias.map((value) => (
-            <div key={value.id} className="media-card">
+            <div
+              key={value.id}
+              className="media-card"
+              onClick={() => {
+                navigate(`/mediadetail/${value.id}`);
+              }}
+            >
               <Media
                 MediaNametext={value.MediaNametext}
                 MediaImages={value.MediaImages}

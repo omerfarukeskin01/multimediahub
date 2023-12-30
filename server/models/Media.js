@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     Media.hasMany(models.Posts);
     Media.hasOne(models.FilmDetails);
     Media.hasMany(models.MediaComments);
-
+    Media.hasMany(models.Rating, {
+      onDelete: "cascade",
+    });
     Media.hasOne(models.SeriesDetails, {
       foreignKey: "MediaID",
     });

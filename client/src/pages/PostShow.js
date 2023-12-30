@@ -16,7 +16,7 @@ function PostShow(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/comments/${selectedPostId}`)
+      .get(`http://localhost:3001/comments/post/${selectedPostId}`)
       .then((response) => {
         setComments(response.data);
       });
@@ -37,7 +37,7 @@ function PostShow(props) {
     console.log(selectedPostId);
     axios
       .post(
-        "http://localhost:3001/comments",
+        "http://localhost:3001/comments/post",
         {
           commentBody: newComment,
           PostId: selectedPostId,
@@ -57,7 +57,7 @@ function PostShow(props) {
             username: response.data.username,
           };
           axios
-            .get(`http://localhost:3001/comments/${selectedPostId}`)
+            .get(`http://localhost:3001/comments/post/${selectedPostId}`)
             .then((response) => {
               setComments(response.data);
               console.log(response.data);
@@ -69,7 +69,7 @@ function PostShow(props) {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
+      .delete(`http://localhost:3001/comments/post/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -84,9 +84,11 @@ function PostShow(props) {
   const handleButtonClick = (postId) => {
     setSelectedPostId(postId);
     if (!showForm) {
-      axios.get(`http://localhost:3001/comments/${postId}`).then((response) => {
-        setComments(response.data);
-      });
+      axios
+        .get(`http://localhost:3001/comments/post/${postId}`)
+        .then((response) => {
+          setComments(response.data);
+        });
     }
 
     setShowForm(!showForm);
@@ -149,7 +151,7 @@ function PostShow(props) {
               <div
                 className="body"
                 onClick={() => {
-                  navigate(`/mediadetail/${value.id}`);
+                  navigate(`/mediadetail/${value.MediaId}`);
                 }}
               >
                 <div class="image-preview">

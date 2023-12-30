@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "../helper/AuthContext";
 import CreateListModal from "./CreateListModal";
 function ProfileCard(props) {
