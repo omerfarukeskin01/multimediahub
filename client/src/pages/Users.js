@@ -48,13 +48,24 @@ function Users() {
             headers: { accessToken: localStorage.getItem("accessToken") },
           })
           .then((response) => {
-            if (response) {
-              setFollowedList(
-                response.data?.map((followed) => {
-                  return followed.id;
-                })
+            console.log("followed:--------------- ", response.data);
+            if (response.data && Array.isArray(response.data)) {
+              // Veri varsa ve bir dizi ise, takip edilenleri güncelle
+              setFollowedList(response.data.map((followed) => followed.id));
+            } else {
+              // Veri yoksa, boşsa veya beklenen formatta değilse
+              console.log(
+                "Takip edilen kullanıcılar bulunamadı veya veri formatı hatalı."
               );
+              setFollowedList([]); // Liste boşaltılabilir
             }
+          })
+          .catch((error) => {
+            console.error(
+              "Takip edilen kullanıcıları alırken bir hata oluştu:",
+              error
+            );
+            setFollowedList([]); // Hata durumunda liste boşaltılabilir
           });
       });
 
@@ -83,7 +94,7 @@ function Users() {
           }}
         />
       </div>
-      {console.log(userr)}
+
       {listOfUsername.map((userrr) => {
         return followedList.includes(userrr.id) ? (
           <ProfileCard

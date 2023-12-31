@@ -86,13 +86,7 @@ function CreatePost() {
         <div className="mediacontainer">
           {console.log(medias)}
           {medias.map((value) => (
-            <div
-              key={value.id}
-              className="media-card"
-              onClick={() => {
-                navigate(`/mediadetail/${value.id}`);
-              }}
-            >
+            <div key={value.id} className="media-card">
               <Media
                 MediaNametext={value.MediaNametext}
                 MediaImages={value.MediaImages}

@@ -4,7 +4,7 @@ const { Users, Followers } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
@@ -61,36 +61,31 @@ router.put("/changepassword", validateToken, async (req, res) => {
   });
 });
 
-
-router.get("/follower/:uid", async (req, res) => {
-  //idsi gönderilen kullanıcıyı takip edenler
-  const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "followed",
-      },
-    ],
-  });
-  console.log(listofFollowers);
-  res.json(listofFollowers.followed);
-});
 router.get("/followed/:uid", async (req, res) => {
-  //idsi gönderilen kullanıcının takip ettiklerini alma
   const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "follower",
-      },
-    ],
-  });
-  console.log("followed", id);
+  try {
+    const listofFollowers = await Users.findByPk(id, {
+      include: [
+        {
+          model: Users,
+          as: "follower",
+        },
+      ],
+    });
 
-  res.json(listofFollowers.follower);
+    // listofFollowers'in boş olup olmadığını kontrol et
+    if (listofFollowers && listofFollowers.follower) {
+      res.json(listofFollowers.follower);
+    } else {
+      // Eğer takipçi bilgisi bulunamazsa, boş bir dizi veya uygun bir mesaj gönder
+      res.json([]);
+    }
+  } catch (error) {
+    console.error("Bir hata oluştu:", error);
+    res.status(500).send("Sunucu hatası");
+  }
 });
+
 router.delete("/unfollow/", validateToken, async (req, res) => {
   console.log(
     "LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG::::",
@@ -160,11 +155,14 @@ router.post("/follow/", validateToken, async (req, res) => {
 router.get("/usersearch", async (req, res) => {
   const { username } = req.query;
 
-  const users = await Users.findAll({ where: { username: {
-    [Op.like]:`${username}%`
-  }
-   },limit: 5 
-   });
+  const users = await Users.findAll({
+    where: {
+      username: {
+        [Op.like]: `${username}%`,
+      },
+    },
+    limit: 5,
+  });
 
   if (!users) res.json({ error: "User Doesn't Exist" });
   res.json(users);

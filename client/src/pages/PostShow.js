@@ -93,6 +93,15 @@ function PostShow(props) {
 
     setShowForm(!showForm);
   };
+  const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:3001/posts/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        navigate("/");
+      });
+  };
 
   const likeAPost = (postId) => {
     axios
@@ -142,6 +151,9 @@ function PostShow(props) {
                   }}
                 >
                   {value.User?.username}
+                  {authState.username === value.User?.username && (
+                    <button onClick={() => deletePost(value.id)}>Delete</button>
+                  )}
                 </div>
               </div>
               <a href="#" class="title">
