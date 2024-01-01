@@ -23,33 +23,38 @@ function ProfileCard(props) {
     props.setSelectedListid(id);
   };
   const followUser = (userId) => {
-    
-    
     axios.post(
       "http://localhost:3001/auth/follow",
       { followedid: userId },
       { headers: { accessToken: localStorage.getItem("accessToken") } }
     );
-  
+
     SetIsFollowed((old) => {
       return !old;
     });
   };
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const followedResponse = await axios.get(`http://localhost:3001/auth/followed/${props.user.id}`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        });
-      
-
-        const followerResponse = await axios.get(`http://localhost:3001/auth/follower/${props.user.id}`, {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        });
-        console.log(followedResponse.data.length);
+        console.log("BİRRRRRRRR");
+        const followedResponse = await axios.get(
+          `http://localhost:3001/auth/followed/${props.user.id}`,
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        );
+        console.log("İKİİİİİİİİİİİ");
+        const followerResponse = await axios.get(
+          `http://localhost:3001/auth/follower/${props.user.id}`,
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        );
+        console.log(
+          "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          followedResponse.data.length
+        );
         console.log(followerResponse.data.length);
 
         setListOfFollowed(followedResponse.data);
@@ -63,11 +68,10 @@ function ProfileCard(props) {
     };
 
     fetchData();
-    console.log("fetched")
+    console.log("fetched");
   }, [props.user.id]);
-  
+
   useEffect(() => {
-    
     axios
       .get(`http://localhost:3001/auth/auth`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -82,12 +86,10 @@ function ProfileCard(props) {
       .then((response) => {
         SetListOfLists(response.data);
       });
-      SetIsFollowed(props.isFollowed);
+    SetIsFollowed(props.isFollowed);
   }, [props, props.isFollowed, isModalOpen, authState, authState.id, user]);
 
-
   const UnFollowUser = (userId) => {
-   
     axios
       .delete("http://localhost:3001/auth/unfollow", {
         data: { followedid: userId },
@@ -111,7 +113,7 @@ function ProfileCard(props) {
         <h3>{props.user.username}</h3>
         <h6>{props.user.Email}</h6>
         <p>
-      Following: {numberOfFollowed} <br /> Followers: {numberOfFollowers}
+          Following: {numberOfFollowed} <br /> Followers: {numberOfFollowers}
         </p>
         <div className="buttons">
           <button className="primarycard">Message</button>
@@ -133,11 +135,9 @@ function ProfileCard(props) {
               ) : (
                 <button
                   onClick={() => {
-
                     setUserId(user.id);
                     followUser(user.id);
                     SetIsFollow(!isFollow);
-                  
                   }}
                   className="primary ghost"
                 >

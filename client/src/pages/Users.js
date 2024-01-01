@@ -8,8 +8,6 @@ import ProfileCard from "./ProfileCard";
 function Users() {
   let inputname;
   const [listOfUsername, setListOfUsername] = useState([]);
-  let inputname;
-  const [listOfUsername, setListOfUsername] = useState([]);
   let { id } = useParams();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -28,12 +26,10 @@ function Users() {
       " ",
       localStorage.getItem("accessToken")
     );
-    console.log(Inputname);
-    const data = { username: Inputname };
+
     console.log(Inputname);
     const data = { username: Inputname };
     axios
-      .get(`http://localhost:3001/auth/usersearch`, { params: data })
       .get(`http://localhost:3001/auth/usersearch`, { params: data })
       .then((response) => {
         setListOfUsername(response.data);
@@ -90,22 +86,9 @@ function Users() {
       setListOfPosts(response.data);
     });
   }, [Inputname]);
-  }, [Inputname]);
 
   return (
     <div className="profilePageContainer">
-      <div class="textInputWrapper">
-        <input
-          placeholder="search"
-          type="text"
-          class="textInput"
-          onChange={(event) => {
-            setInputUsername(event.target.value);
-          }}
-        />
-      </div>
-
-      {listOfUsername.map((userrr) => {
       <div class="textInputWrapper">
         <input
           placeholder="search"

@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 const { Op } = require("sequelize");
-const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
@@ -61,9 +60,34 @@ router.put("/changepassword", validateToken, async (req, res) => {
     });
   });
 });
-
+router.get("/follower/:uid", async (req, res) => {
+  //idsi gönderilen kullanıcıyı takip edenler
+  console.log("FOLLLOWERRRRRRRRRRRRRRRRRRRRRRRRRRR ID: ", req.params.uid);
+  const id = req.params.uid;
+  const listofFollowers = await Users.findByPk(id, {
+    include: [
+      {
+        model: Users,
+        as: "followed",
+      },
+    ],
+  }).catch((err) => {
+    console.log(err);
+  });
+  console.log(listofFollowers);
+  if (listofFollowers && listofFollowers.follower) {
+    res.json(listofFollowers.followed);
+  } else {
+    // Eğer takipçi bilgisi bulunamazsa, boş bir dizi veya uygun bir mesaj gönder
+    res.json([]);
+  }
+});
 router.get("/followed/:uid", async (req, res) => {
   const id = req.params.uid;
+  console.log(
+    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa",
+    req.params.uid
+  );
   try {
     const listofFollowers = await Users.findByPk(id, {
       include: [
