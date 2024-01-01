@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "../helper/AuthContext";
 import CreateListModal from "./CreateListModal";
 import { accordionActionsClasses } from "@mui/material";
@@ -69,9 +68,9 @@ function ProfileCard(props) {
     };
 
     fetchData();
-    console.log("fetched")
+    console.log("fetched");
   }, [props.user.id]);
-  
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/auth/auth`, {

@@ -16,7 +16,7 @@ function Users() {
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
   const [Inputname, setInputUsername] = useState("");
-  const [selectedListid, setSelectedListid] = useState(-1); //0 is posts
+  const [selectedListid, setSelectedListid] = useState(-1); //-1 listeleme işlemi için tıklama özelliği çalışmamalı
 
   useEffect(() => {
     console.log("udst: ", listOfUsername);
@@ -26,17 +26,18 @@ function Users() {
       " ",
       localStorage.getItem("accessToken")
     );
-<<<<<<< HEAD
-=======
 
->>>>>>> fea27fcda915d56289f9497d314560a889518436
     console.log(Inputname);
     const data = { username: Inputname };
     axios
       .get(`http://localhost:3001/auth/usersearch`, { params: data })
       .then((response) => {
         setListOfUsername(response.data);
+        setListOfUsername(response.data);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching usernames:", error);
       })
       .catch((error) => {
         console.error("Error fetching usernames:", error);
@@ -52,13 +53,24 @@ function Users() {
             headers: { accessToken: localStorage.getItem("accessToken") },
           })
           .then((response) => {
-            if (response) {
-              setFollowedList(
-                response.data?.map((followed) => {
-                  return followed.id;
-                })
+            console.log("followed:--------------- ", response.data);
+            if (response.data && Array.isArray(response.data)) {
+              // Veri varsa ve bir dizi ise, takip edilenleri güncelle
+              setFollowedList(response.data.map((followed) => followed.id));
+            } else {
+              // Veri yoksa, boşsa veya beklenen formatta değilse
+              console.log(
+                "Takip edilen kullanıcılar bulunamadı veya veri formatı hatalı."
               );
+              setFollowedList([]); // Liste boşaltılabilir
             }
+          })
+          .catch((error) => {
+            console.error(
+              "Takip edilen kullanıcıları alırken bir hata oluştu:",
+              error
+            );
+            setFollowedList([]); // Hata durumunda liste boşaltılabilir
           });
       });
 
@@ -87,11 +99,7 @@ function Users() {
           }}
         />
       </div>
-<<<<<<< HEAD
-      {console.log(userr)}
-=======
 
->>>>>>> fea27fcda915d56289f9497d314560a889518436
       {listOfUsername.map((userrr) => {
         return followedList.includes(userrr.id) ? (
           <ProfileCard

@@ -84,6 +84,7 @@ function CreatePost() {
         <p>{error}</p> // Hata mesajını göster
       ) : (
         <div className="mediacontainer">
+          {console.log(medias)}
           {medias.map((value) => (
             <div key={value.id} className="media-card">
               <Media
