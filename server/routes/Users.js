@@ -4,7 +4,7 @@ const { Users, Followers } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
@@ -61,33 +61,18 @@ router.put("/changepassword", validateToken, async (req, res) => {
   });
 });
 
-
-router.get("/follower/:uid", async (req, res) => {
-  //idsi gönderilen kullanıcıyı takip edenler
-  const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "followed",
-      },
-    ],
-  });
-  console.log(listofFollowers);
-  res.json(listofFollowers.followed);
-});
 router.get("/followed/:uid", async (req, res) => {
   //idsi gönderilen kullanıcının takip ettiklerini alma
   const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "follower",
-      },
-    ],
-  });
-  console.log("followed", id);
+  try {
+    const listofFollowers = await Users.findByPk(id, {
+      include: [
+        {
+          model: Users,
+          as: "follower",
+        },
+      ],
+    });
 
   res.json(listofFollowers.follower);
 });

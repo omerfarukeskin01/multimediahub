@@ -26,6 +26,10 @@ function Users() {
       " ",
       localStorage.getItem("accessToken")
     );
+<<<<<<< HEAD
+=======
+
+>>>>>>> fea27fcda915d56289f9497d314560a889518436
     console.log(Inputname);
     const data = { username: Inputname };
     axios
@@ -83,7 +87,11 @@ function Users() {
           }}
         />
       </div>
+<<<<<<< HEAD
       {console.log(userr)}
+=======
+
+>>>>>>> fea27fcda915d56289f9497d314560a889518436
       {listOfUsername.map((userrr) => {
         return followedList.includes(userrr.id) ? (
           <ProfileCard
