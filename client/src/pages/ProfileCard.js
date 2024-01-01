@@ -69,7 +69,7 @@ function ProfileCard(props) {
 
     fetchData();
     console.log("fetched");
-  }, [props.user.id]);
+  }, [props.user.id,isFollow]);
 
   useEffect(() => {
     axios

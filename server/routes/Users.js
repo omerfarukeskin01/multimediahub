@@ -74,8 +74,8 @@ router.get("/follower/:uid", async (req, res) => {
   }).catch((err) => {
     console.log(err);
   });
-  console.log(listofFollowers);
-  if (listofFollowers && listofFollowers.follower) {
+ 
+  if (listofFollowers && listofFollowers.followed) {
     res.json(listofFollowers.followed);
   } else {
     // Eğer takipçi bilgisi bulunamazsa, boş bir dizi veya uygun bir mesaj gönder
