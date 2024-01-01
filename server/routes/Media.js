@@ -1,16 +1,90 @@
 const express = require("express");
 const router = express.Router();
-const { Medias, Posts, Likes } = require("../models");
-
+const {
+  Medias,
+  FilmDetails,
+  GameDetails,
+  SeriesDetails,
+  Posts,
+  Likes,
+} = require("../models");
+const { Op } = require("sequelize");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/", validateToken, async (req, res) => {
+router.get("/", async (req, res) => {
   const listOfMedias = await Medias.findAll();
   //const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
   //res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
   res.json(listOfMedias);
 });
 
+router.get("/mediadetail/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const media = await Medias.findByPk(id, {
+      include: [
+        { model: FilmDetails, required: false },
+        { model: GameDetails, required: false },
+        { model: SeriesDetails, required: false },
+      ],
+    });
+
+    if (!media) {
+      return res.status(404).send("Media not found");
+    }
+
+    let detail;
+    switch (media.MediaType) {
+      case "Film":
+        detail = media.FilmDetail;
+        break;
+      case "Game":
+        detail = media.GameDetail;
+        break;
+      case "Series":
+        detail = media.SeriesDetail;
+        break;
+      default:
+        return res.status(400).send("Invalid media type");
+    }
+
+    return res.json(media);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});
+router.get("/mediasearch", async (req, res) => {
+  const { mediaQuery } = req.query;
+
+  try {
+    const searchTerms = mediaQuery.split(/\s+/); // Boşluklara göre bölünmüş terimler
+    const searchConditions = searchTerms.map((term) => {
+      return {
+        MediaNametext: {
+          [Op.like]: `%${term}%`, // Her terimin herhangi bir yerde geçtiği kayıtları bulur
+        },
+      };
+    });
+
+    const medias = await Medias.findAll({
+      where: {
+        [Op.or]: searchConditions, // Tüm koşulları OR operatörüyle birleştirir
+      },
+      limit: 5,
+    });
+
+    if (medias.length === 0) {
+      return res.status(404).json({ error: "Media Not Found" });
+    }
+
+    res.json(medias);
+  } catch (error) {
+    console.error("Error during media search:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 /* router.get("/byId/:id", async (req, res) => {
   const id = req.params.id;
   const post = await Posts.findByPk(id);

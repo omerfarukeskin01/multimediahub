@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import CreatePostModal from "./CreatePostModal";
 import { Button } from "antd";
 import AddToListModal from "./AddToListModal";
+import { useNavigate } from "react-router-dom";
 function Media(props) {
   const [inputValue, setInputValue] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isListModalOpen, SetIsListModalOpen] = useState(false);
+  const navigate = useNavigate();
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -35,12 +37,20 @@ function Media(props) {
         <div class="card">
           <img src={props.MediaImages} />
           <div class="descriptions">
-            <h1>{props.MediaNametext}</h1>
+            <h1
+              onClick={() => {
+                navigate(`/mediadetail/${props.id}`);
+              }}
+            >
+              {props.MediaNametext}
+            </h1>
             <p>{props.MediaType}</p>
-            <Button type="primary" onClick={showModal}>
-              Share
-            </Button>
-            <Button onClick={showListModal}>LİSTEYE EKLE BABA</Button>
+            <div className="mediabutton">
+              <Button type="primary" onClick={showModal}>
+                Share
+              </Button>
+              <Button onClick={showListModal}>LİSTEYE EKLE BABA</Button>
+            </div>
           </div>
         </div>
       </div>

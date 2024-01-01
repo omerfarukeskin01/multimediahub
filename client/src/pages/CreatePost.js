@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../helper/AuthContext";
 import Media from "../pages/Media";
 function CreatePost() {
+  const [userSearchQuery, setUserSearchQuery] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
   const [medias, setMedias] = useState([]);
@@ -16,15 +18,6 @@ function CreatePost() {
 
   const previous = () => {
     carouselRef.current.prev();
-  };
-
-  const contentStyle = {
-    margin: 0,
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
   };
 
   const onChange = (currentSlide) => {
@@ -41,14 +34,71 @@ function CreatePost() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
+        setError("");
         setMedias(response.data);
         console.log(response.data);
       });
   }, []);
+  const searchOnclick = (e) => {
+    console.log(e.target.value);
+    if (e.target.value !== "") {
+      axios
+        .get(`http://localhost:3001/Medias/mediasearch`, {
+          params: { mediaQuery: e.target.value },
+        })
+        .then((response) => {
+          setError("");
+          console.log("searxh medias", response.data);
+          setMedias(response.data);
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            setError("Media bulunamadı.");
+          } else {
+            setError("Bir hata oluştu.");
+          }
+        });
+    } else {
+      axios
+        .get(`http://localhost:3001/Medias/`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          setMedias(response.data);
+        });
+    }
+  };
 
   return (
     <>
+      <div class="textInputWrapper">
+        <input
+          placeholder="search"
+          type="text"
+          class="textInput"
+          onChange={searchOnclick}
+        />
+      </div>
 
+      {error ? (
+        <p>{error}</p> // Hata mesajını göster
+      ) : (
+        <div className="mediacontainer">
+          {console.log(medias)}
+          {medias.map((value) => (
+            <div key={value.id} className="media-card">
+              <Media
+                MediaNametext={value.MediaNametext}
+                MediaImages={value.MediaImages}
+                MediaType={value.MediaType}
+                id={value.id}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/*
       <div className="test">
 
   
@@ -66,7 +116,7 @@ function CreatePost() {
             </div>
           ))}
         </Carousel>
-      </div>
+      </div>*/}
     </>
   );
 }

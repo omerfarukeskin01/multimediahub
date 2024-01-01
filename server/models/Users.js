@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Likes, {
       onDelete: "cascade",
     });
+    User.hasMany(models.Rating, {
+      onDelete: "cascade",
+    });
     User.belongsToMany(models.Users, {
       through: "Followers",
       as: "followed",
@@ -30,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Medias);
     User.hasMany(models.Posts);
     User.hasMany(models.FilmDetails);
-    User.hasMany(models.MediaComments)
+    User.hasMany(models.MediaComments);
     User.hasMany(models.PostComments);
 
     //User.belongsToMany(models.Posts, { through: "Likes" });

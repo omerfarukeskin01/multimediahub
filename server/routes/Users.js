@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Users, Followers, Posts } = require("../models");
+const { Users, Followers } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
+const { Op } = require("sequelize");
 const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
@@ -61,35 +62,31 @@ router.put("/changepassword", validateToken, async (req, res) => {
   });
 });
 
-router.get("/follower/:uid", validateToken, async (req, res) => {
-  //idsi gönderilen kullanıcıyı takip edenler
-  const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "followed",
-      },
-    ],
-  });
-  console.log(listofFollowers);
-  res.json(listofFollowers.followed);
-});
 router.get("/followed/:uid", async (req, res) => {
-  //idsi gönderilen kullanıcının takip ettiklerini alma
   const id = req.params.uid;
-  const listofFollowers = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "follower",
-      },
-    ],
-  });
-  console.log("followed", id);
+  try {
+    const listofFollowers = await Users.findByPk(id, {
+      include: [
+        {
+          model: Users,
+          as: "follower",
+        },
+      ],
+    });
 
-  res.json(listofFollowers.follower);
+    // listofFollowers'in boş olup olmadığını kontrol et
+    if (listofFollowers && listofFollowers.follower) {
+      res.json(listofFollowers.follower);
+    } else {
+      // Eğer takipçi bilgisi bulunamazsa, boş bir dizi veya uygun bir mesaj gönder
+      res.json([]);
+    }
+  } catch (error) {
+    console.error("Bir hata oluştu:", error);
+    res.status(500).send("Sunucu hatası");
+  }
 });
+
 router.delete("/unfollow/", validateToken, async (req, res) => {
   console.log(
     "LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG::::",
@@ -156,20 +153,20 @@ router.post("/follow/", validateToken, async (req, res) => {
       res.json("ERROR");
     });
 });
-router.get("/followedposts/:id", async (req, res) => {
-  const id = req.params.id;
-  const listofFollowedposts = await Users.findByPk(id, {
-    include: [
-      {
-        model: Users,
-        as: "follower",
-        include: [Posts],
-      },
-    ],
-  }).catch((err) => res.json(err));
-  console.log("followedposts", id);
+router.get("/usersearch", async (req, res) => {
+  const { username } = req.query;
 
-  res.json(listofFollowedposts);
+  const users = await Users.findAll({
+    where: {
+      username: {
+        [Op.like]: `${username}%`,
+      },
+    },
+    limit: 5,
+  });
+
+  if (!users) res.json({ error: "User Doesn't Exist" });
+  res.json(users);
 });
 router.get("/usersearch", async (req, res) => {
   const { username } = req.query;

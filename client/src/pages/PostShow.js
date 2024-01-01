@@ -14,11 +14,9 @@ function PostShow(props) {
 
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/comments/${selectedPostId}`)
+      .get(`http://localhost:3001/comments/post/${selectedPostId}`)
       .then((response) => {
         setComments(response.data);
       });
@@ -28,7 +26,6 @@ function PostShow(props) {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-       
         const likedPostIds = response.data.likedPosts.map(
           (like) => like.PostId
         );
@@ -36,15 +33,11 @@ function PostShow(props) {
       });
   }, [selectedPostId]);
 
-
-
-  
-
   const addComment = () => {
     console.log(selectedPostId);
     axios
       .post(
-        "http://localhost:3001/comments",
+        "http://localhost:3001/comments/post",
         {
           commentBody: newComment,
           PostId: selectedPostId,
@@ -64,7 +57,7 @@ function PostShow(props) {
             username: response.data.username,
           };
           axios
-            .get(`http://localhost:3001/comments/${selectedPostId}`)
+            .get(`http://localhost:3001/comments/post/${selectedPostId}`)
             .then((response) => {
               setComments(response.data);
               console.log(response.data);
@@ -76,7 +69,7 @@ function PostShow(props) {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
+      .delete(`http://localhost:3001/comments/post/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -91,12 +84,23 @@ function PostShow(props) {
   const handleButtonClick = (postId) => {
     setSelectedPostId(postId);
     if (!showForm) {
-      axios.get(`http://localhost:3001/comments/${postId}`).then((response) => {
-        setComments(response.data);
-      });
+      axios
+        .get(`http://localhost:3001/comments/post/${postId}`)
+        .then((response) => {
+          setComments(response.data);
+        });
     }
 
     setShowForm(!showForm);
+  };
+  const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:3001/posts/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        navigate("/");
+      });
   };
 
   const likeAPost = (postId) => {
@@ -135,16 +139,22 @@ function PostShow(props) {
           return (
             <div key={key} class="post-card">
               <div class="avatar">
-              <img
-          className="avatar"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
-          alt="user"
-        />
-            <div className="post-username"     onClick={() => {
-                  navigate(`/profile/${value.UserId}`);
-                }}>
-             {value.User?.username}
-            </div>
+                <img
+                  className="avatar"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                  alt="user"
+                />
+                <div
+                  className="post-username"
+                  onClick={() => {
+                    navigate(`/profile/${value.UserId}`);
+                  }}
+                >
+                  {value.User?.username}
+                  {authState.username === value.User?.username && (
+                    <button onClick={() => deletePost(value.id)}>Delete</button>
+                  )}
+                </div>
               </div>
               <a href="#" class="title">
                 {value.postText}
@@ -153,7 +163,7 @@ function PostShow(props) {
               <div
                 className="body"
                 onClick={() => {
-                  navigate(`/post/${value.id}`);
+                  navigate(`/mediadetail/${value.MediaId}`);
                 }}
               >
                 <div class="image-preview">
@@ -322,8 +332,6 @@ function PostShow(props) {
                 )}
               </div>
             </div>
-
-          
           );
         })}
     </div>

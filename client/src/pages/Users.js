@@ -8,6 +8,8 @@ import ProfileCard from "./ProfileCard";
 function Users() {
   let inputname;
   const [listOfUsername, setListOfUsername] = useState([]);
+  let inputname;
+  const [listOfUsername, setListOfUsername] = useState([]);
   let { id } = useParams();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -28,11 +30,18 @@ function Users() {
     );
     console.log(Inputname);
     const data = { username: Inputname };
+    console.log(Inputname);
+    const data = { username: Inputname };
     axios
+      .get(`http://localhost:3001/auth/usersearch`, { params: data })
       .get(`http://localhost:3001/auth/usersearch`, { params: data })
       .then((response) => {
         setListOfUsername(response.data);
+        setListOfUsername(response.data);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching usernames:", error);
       })
       .catch((error) => {
         console.error("Error fetching usernames:", error);
@@ -48,13 +57,24 @@ function Users() {
             headers: { accessToken: localStorage.getItem("accessToken") },
           })
           .then((response) => {
-            if (response) {
-              setFollowedList(
-                response.data?.map((followed) => {
-                  return followed.id;
-                })
+            console.log("followed:--------------- ", response.data);
+            if (response.data && Array.isArray(response.data)) {
+              // Veri varsa ve bir dizi ise, takip edilenleri güncelle
+              setFollowedList(response.data.map((followed) => followed.id));
+            } else {
+              // Veri yoksa, boşsa veya beklenen formatta değilse
+              console.log(
+                "Takip edilen kullanıcılar bulunamadı veya veri formatı hatalı."
               );
+              setFollowedList([]); // Liste boşaltılabilir
             }
+          })
+          .catch((error) => {
+            console.error(
+              "Takip edilen kullanıcıları alırken bir hata oluştu:",
+              error
+            );
+            setFollowedList([]); // Hata durumunda liste boşaltılabilir
           });
       });
 
@@ -70,9 +90,22 @@ function Users() {
       setListOfPosts(response.data);
     });
   }, [Inputname]);
+  }, [Inputname]);
 
   return (
     <div className="profilePageContainer">
+      <div class="textInputWrapper">
+        <input
+          placeholder="search"
+          type="text"
+          class="textInput"
+          onChange={(event) => {
+            setInputUsername(event.target.value);
+          }}
+        />
+      </div>
+
+      {listOfUsername.map((userrr) => {
       <div class="textInputWrapper">
         <input
           placeholder="search"

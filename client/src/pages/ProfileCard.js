@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "../helper/AuthContext";
 import CreateListModal from "./CreateListModal";
+import { accordionActionsClasses } from "@mui/material";
 function ProfileCard(props) {
   const { authState } = useContext(AuthContext);
   const [user, SetUser] = useState(props.user);
+  const [userId, setUserId] = useState(props.user.id);
   const [isFollowed, SetIsFollowed] = useState(props.isFollowed);
+  const [isFollow, SetIsFollow] = useState(false);
   const [listOfLists, SetListOfLists] = useState([]);
+  const [listOfFollowers, setListOfFollowers] = useState([]);
+  const [numberOfFollowers, setNumberOfFollowers] = useState(null);
+  const [numberOfFollowed, setNumberOfFollowed] = useState(null);
+  const [listOfFollowed, setListOfFollowed] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
   const showModal = () => {
@@ -17,16 +23,51 @@ function ProfileCard(props) {
     props.setSelectedListid(id);
   };
   const followUser = (userId) => {
+    
+    
     axios.post(
       "http://localhost:3001/auth/follow",
       { followedid: userId },
       { headers: { accessToken: localStorage.getItem("accessToken") } }
     );
+  
     SetIsFollowed((old) => {
       return !old;
     });
   };
+
+
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const followedResponse = await axios.get(`http://localhost:3001/auth/followed/${props.user.id}`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        });
+      
+
+        const followerResponse = await axios.get(`http://localhost:3001/auth/follower/${props.user.id}`, {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        });
+        console.log(followedResponse.data.length);
+        console.log(followerResponse.data.length);
+
+        setListOfFollowed(followedResponse.data);
+        setNumberOfFollowed(followedResponse.data.length);
+
+        setListOfFollowers(followerResponse.data);
+        setNumberOfFollowers(followerResponse.data.length);
+      } catch (error) {
+        console.error("Error fetching follower and following data:", error);
+      }
+    };
+
+    fetchData();
+    console.log("fetched")
+  }, [props.user.id]);
+  
+  useEffect(() => {
+    
     axios
       .get(`http://localhost:3001/auth/auth`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -41,10 +82,12 @@ function ProfileCard(props) {
       .then((response) => {
         SetListOfLists(response.data);
       });
-    SetIsFollowed(props.isFollowed);
+      SetIsFollowed(props.isFollowed);
   }, [props, props.isFollowed, isModalOpen, authState, authState.id, user]);
 
+
   const UnFollowUser = (userId) => {
+   
     axios
       .delete("http://localhost:3001/auth/unfollow", {
         data: { followedid: userId },
@@ -68,7 +111,7 @@ function ProfileCard(props) {
         <h3>{props.user.username}</h3>
         <h6>{props.user.Email}</h6>
         <p>
-          User interface designer and <br /> front-end developer
+      Following: {numberOfFollowed} <br /> Followers: {numberOfFollowers}
         </p>
         <div className="buttons">
           <button className="primarycard">Message</button>
@@ -81,6 +124,7 @@ function ProfileCard(props) {
                   backgroundColor={"red"}
                   onClick={() => {
                     UnFollowUser(user.id);
+                    SetIsFollow(!isFollow);
                   }}
                   className="primary ghost"
                 >
@@ -89,7 +133,11 @@ function ProfileCard(props) {
               ) : (
                 <button
                   onClick={() => {
+
+                    setUserId(user.id);
                     followUser(user.id);
+                    SetIsFollow(!isFollow);
+                  
                   }}
                   className="primary ghost"
                 >
