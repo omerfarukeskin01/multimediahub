@@ -16,7 +16,7 @@ function Users() {
   const { authState } = useContext(AuthContext);
   const [userr, setUser] = useState({});
   const [Inputname, setInputUsername] = useState("");
-  const [selectedListid, setSelectedListid] = useState(0); //0 is posts
+  const [selectedListid, setSelectedListid] = useState(-1); //0 is posts
 
   useEffect(() => {
     console.log("udst: ", listOfUsername);

@@ -45,6 +45,7 @@ function ProfileCard(props) {
         const followedResponse = await axios.get(`http://localhost:3001/auth/followed/${props.user.id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         });
+        console.log("kocerobilbilo",props.user.id)
       
 
         const followerResponse = await axios.get(`http://localhost:3001/auth/follower/${props.user.id}`, {
@@ -65,7 +66,7 @@ function ProfileCard(props) {
 
     fetchData();
     console.log("fetched")
-  }, [props.user.id]);
+  }, [props.user.id,isFollow]);
   
   useEffect(() => {
     
