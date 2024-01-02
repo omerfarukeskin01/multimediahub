@@ -8,14 +8,21 @@ const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
-  bcrypt.hash(password, 10).then((hash) => {
-    Users.create({
-      username: username,
-      password: hash,
-      Email: Email,
+  const user = await Users.findOne({ where: { username: username } });
+  if(user==null){
+    bcrypt.hash(password, 10).then((hash) => {
+      Users.create({
+        username: username,
+        password: hash,
+        Email: Email,
+      });
+      res.json("SUCCESS");
     });
-    res.json("SUCCESS");
-  });
+  }
+  else{
+    res.json("there exist user who have this username")
+  }
+
 });
 router.get("/users", validateToken, async (req, res) => {
   const listOfUsers = await Users.findAll();

@@ -26,10 +26,14 @@ function PostShow(props) {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-        const likedPostIds = response.data.likedPosts.map(
-          (like) => like.PostId
-        );
-        setLikedPosts(likedPostIds);
+        const likedPostsData = response.data.likedPosts;
+        if (likedPostsData && Array.isArray(likedPostsData)) {
+          const likedPostIds = likedPostsData.map((like) => like.PostId);
+          setLikedPosts(likedPostIds);
+        } else {
+          // Handle the case where likedPostsData is not an array
+          console.error("Liked posts data is not an array:", likedPostsData);
+        }
       });
   }, [selectedPostId]);
 
