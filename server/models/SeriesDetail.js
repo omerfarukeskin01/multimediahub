@@ -7,9 +7,7 @@ module.exports = (sequelize, DataTypes) => {
               key: 'MediaID'
             }
           }, */
-    Title: {
-      type: DataTypes.STRING(50),
-    },
+
     NumberOfEpisodes: {
       type: DataTypes.INTEGER,
     },
