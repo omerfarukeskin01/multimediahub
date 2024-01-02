@@ -14,7 +14,7 @@ function AddToListModal(props) {
   const [user, SetUser] = useState({});
   const [listOfLists, SetListOfLists] = useState([]);
   const [open, setOpen] = useState(false); //hata mesaji için
-  const [listid, setListId] = useState("");
+  const [listid, setListId] = useState("0");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
@@ -61,9 +61,13 @@ function AddToListModal(props) {
   const handleOk = () => {
     //event gibi bir şey gelecek
     //const formData = formikRef.current.values;
-    onSubmit();
-    props.setIsModalOpen(false);
-    setOpen(true);
+    if (listid === "0") {
+      alert("select a list");
+    } else {
+      onSubmit();
+      props.setIsModalOpen(false);
+      setOpen(true);
+    }
   };
 
   const handleCancel = () => {

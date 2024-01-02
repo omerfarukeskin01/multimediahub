@@ -43,10 +43,14 @@ function CreateListModal(props) {
 
   const handleOk = () => {
     const formData = formikRef.current.values;
-
-    onSubmit(formData);
-    props.setIsModalOpen(false);
-    setOpen(true);
+    const isValid = Object.keys(formikRef.current.errors).length === 0;
+    if (isValid) {
+      onSubmit(formData);
+      props.setIsModalOpen(false);
+      setOpen(true);
+    } else {
+      alert("input not valid");
+    }
   };
 
   const handleCancel = () => {

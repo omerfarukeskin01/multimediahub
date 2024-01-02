@@ -16,7 +16,7 @@ function Home() {
       navigate("/login");
     } else {
       axios
-        .get("http://localhost:3001/posts", {
+        .get("http://localhost:3001/auth/followedposts", {
           headers: authState.status
             ? { accessToken: localStorage.getItem("accessToken") }
             : {},

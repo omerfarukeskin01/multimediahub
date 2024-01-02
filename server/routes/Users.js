@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Users, Followers } = require("../models");
+const { Users, Followers, Posts, Likes, Medias } = require("../models");
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
@@ -9,7 +9,7 @@ const { Op } = require("sequelize");
 router.post("/", async (req, res) => {
   const { username, password, Email } = req.body;
   const user = await Users.findOne({ where: { username: username } });
-  if(user==null){
+  if (user == null) {
     bcrypt.hash(password, 10).then((hash) => {
       Users.create({
         username: username,
@@ -18,11 +18,9 @@ router.post("/", async (req, res) => {
       });
       res.json("SUCCESS");
     });
+  } else {
+    res.json("there exist user who have this username");
   }
-  else{
-    res.json("there exist user who have this username")
-  }
-
 });
 router.get("/users", validateToken, async (req, res) => {
   const listOfUsers = await Users.findAll();
@@ -69,7 +67,6 @@ router.put("/changepassword", validateToken, async (req, res) => {
 });
 router.get("/follower/:uid", async (req, res) => {
   //idsi gönderilen kullanıcıyı takip edenler
-  console.log("FOLLLOWERRRRRRRRRRRRRRRRRRRRRRRRRRR ID: ", req.params.uid);
   const id = req.params.uid;
   const listofFollowers = await Users.findByPk(id, {
     include: [
@@ -81,7 +78,7 @@ router.get("/follower/:uid", async (req, res) => {
   }).catch((err) => {
     console.log(err);
   });
- 
+
   if (listofFollowers && listofFollowers.followed) {
     res.json(listofFollowers.followed);
   } else {
@@ -91,10 +88,7 @@ router.get("/follower/:uid", async (req, res) => {
 });
 router.get("/followed/:uid", async (req, res) => {
   const id = req.params.uid;
-  console.log(
-    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa",
-    req.params.uid
-  );
+
   try {
     const listofFollowers = await Users.findByPk(id, {
       include: [
@@ -223,5 +217,40 @@ router.get("/basicinfo/:id", async (req, res) => {
 
   res.json(basicInfo);
 });
-
+router.get("/followedposts", validateToken, async (req, res) => {
+  const id = req.user.id;
+  const listofFollowedposts = await Users.findByPk(id, {
+    include: [
+      {
+        model: Users,
+        as: "follower",
+        include: {
+          model: Posts,
+          include: [
+            { model: Likes },
+            { model: Medias },
+            {
+              model: Users,
+              attributes: ["username"], // Sadece username alanını al
+            },
+          ],
+        },
+      },
+    ],
+  }).catch((err) => res.json(err));
+  const allPosts = listofFollowedposts.follower.map(
+    (follower) => follower.Posts
+  );
+  console.log("followedposts", req.user.id);
+  const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
+  const olddata = {
+    listOfPosts: allPosts,
+    likedPosts: likedPosts,
+  };
+  const newData = {
+    listOfPosts: olddata.listOfPosts.map((postArray) => postArray[0]),
+    likedPosts: olddata.likedPosts,
+  };
+  res.json(newData);
+});
 module.exports = router;

@@ -16,11 +16,20 @@ function ProfileCard(props) {
   const [listOfFollowed, setListOfFollowed] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
+  const [currentList, setCurrentList] = useState(-1);
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleClickOnList = (id) => {
-    props.setSelectedListid(id);
+    if (currentList == id) {
+      console.log("Geldi burayaaaaŞ sıfırrrr");
+      props.setSelectedListid(0);
+      setCurrentList(-1);
+    } else {
+      console.log("Geldi burayaaaaŞ ", id, " ", currentList);
+      props.setSelectedListid(id);
+      setCurrentList(id);
+    }
   };
   const followUser = (userId) => {
     axios.post(
@@ -69,7 +78,7 @@ function ProfileCard(props) {
 
     fetchData();
     console.log("fetched");
-  }, [props.user.id,isFollow]);
+  }, [props.user.id, isFollow]);
 
   useEffect(() => {
     axios
@@ -148,7 +157,7 @@ function ProfileCard(props) {
           )}
         </div>
         <div className="skills">
-          <h6>Skills</h6>
+          <h6>Lists</h6>
           <ul>
             {listOfLists.map((list) => {
               return (
