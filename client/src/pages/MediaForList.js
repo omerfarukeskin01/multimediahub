@@ -54,9 +54,9 @@ function MediaForList(props) {
           <div class="descriptions">
             <h1>{props.media.MediaNametext}</h1>
             <p>{props.media.MediaType}</p>
-            <Button type="primary" onClick={deleteMediaFromListClick}>
+            <button className="medialist"  onClick={deleteMediaFromListClick}>
               Delete Media
-            </Button>
+            </button>
           </div>
         </div>
       </div>

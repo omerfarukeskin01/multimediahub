@@ -125,7 +125,6 @@ function ProfileCard(props) {
           Following: {numberOfFollowed} <br /> Followers: {numberOfFollowers}
         </p>
         <div className="buttons">
-          <button className="primarycard">Message</button>
           {authState.id == props.user.id ? (
             <div></div>
           ) : (

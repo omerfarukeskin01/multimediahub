@@ -231,9 +231,9 @@ function MediaDetail() {
         <div className="row mt-3">
           <div className="col">
             {comments.map((comment) => (
-              <div key={comment.id} className="mb-2 p-3 border rounded">
+              <div key={comment.id} className="mb-2p-3borderrounded">
                 <p>{comment.commentBody}</p>
-                <small>Kullanıcı Adı: {comment.username}</small>
+                <small>Username: {comment.username}</small>
                 {authState.username === comment.username && (
                     <button class="delete-button" onClick={() => deleteComment(comment.id)}>
   <svg class="delete-svgIcon" viewBox="0 0 448 512">

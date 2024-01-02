@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
     },
-    Userrole: {
-      type: DataTypes.STRING(50),
-    },
   });
   User.associate = (models) => {
     User.hasMany(models.Likes, {
