@@ -19,9 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     FilmSynopsis: {
       type: DataTypes.STRING(255),
     },
-    Title: {
-      type: DataTypes.STRING(50),
-    },
+
     /*       AddedOrUpdatedByUserId: {
         type: DataTypes.INTEGER,
         references: {
@@ -35,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     }, */
   });
   FilmDetail.associate = (models) => {
-    FilmDetail.belongsTo(models.Users);
     FilmDetail.belongsTo(models.Medias);
   };
   return FilmDetail;
