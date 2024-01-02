@@ -12,19 +12,25 @@ router.post("/", validateToken, async (req, res) => {
   res.json(list);
 });
 router.get("/getlistbylistid/:id", async (req, res) => {
-  //doğrudan medya listini ver
+  // doğrudan medya listini ver
   const listid = req.params.id;
   console.log(listid, "getlistbyuseridlistid");
 
-  await Lists.findOne({
-    where: { id: listid },
-    include: [{ model: Medias }],
-  })
-    .then((response) => {
-      // console.log(response);
+  try {
+    const response = await Lists.findOne({
+      where: { id: listid },
+      include: [{ model: Medias }],
+    });
+
+    if (response) {
       res.json(response.Medias);
-    })
-    .catch((err) => console.log(err));
+    } else {
+      res.json([]); // or handle the case when the list is not found
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 router.post("/addmediatolist", async (req, res) => {
