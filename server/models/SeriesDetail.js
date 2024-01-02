@@ -7,9 +7,7 @@ module.exports = (sequelize, DataTypes) => {
               key: 'MediaID'
             }
           }, */
-    Title: {
-      type: DataTypes.STRING(50),
-    },
+
     NumberOfEpisodes: {
       type: DataTypes.INTEGER,
     },
@@ -32,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
           } */
   });
   SeriesDetail.associate = (models) => {
-    SeriesDetail.belongsTo(models.Users);
-
     SeriesDetail.belongsTo(models.Medias, {
       foreignKey: "MediaID",
       as: "Media",

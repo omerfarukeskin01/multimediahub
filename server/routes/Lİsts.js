@@ -12,9 +12,7 @@ router.post("/", validateToken, async (req, res) => {
   res.json(list);
 });
 router.get("/getlistbylistid/:id", async (req, res) => {
-  // doğrudan medya listini ver
   const listid = req.params.id;
-  console.log(listid, "getlistbyuseridlistid");
 
   try {
     const response = await Lists.findOne({
@@ -25,11 +23,11 @@ router.get("/getlistbylistid/:id", async (req, res) => {
     if (response) {
       res.json(response.Medias);
     } else {
-      res.json([]); // or handle the case when the list is not found
+      res.json([]);
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send("Sunucu hatası.");
   }
 });
 

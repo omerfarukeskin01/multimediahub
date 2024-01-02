@@ -7,9 +7,7 @@ module.exports = (sequelize, DataTypes) => {
               key: 'MediaID'
             }
           }, */
-    Title: {
-      type: DataTypes.STRING(50),
-    },
+
     Publisher: {
       type: DataTypes.STRING(50),
     },
@@ -30,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
           }, */
   });
   GameDetail.associate = (models) => {
-    GameDetail.belongsTo(models.Users);
     GameDetail.belongsTo(models.Medias, { foreignKey: "MediaID" });
   };
   return GameDetail;

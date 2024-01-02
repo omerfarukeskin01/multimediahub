@@ -1,19 +1,43 @@
 const express = require("express");
 const router = express.Router();
-const { PostComments, MediaComments, Rating } = require("../models/");
+const { PostComments, MediaComments, Rating, Users } = require("../models/");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // Post comment routes
 router.get("/post/:postId", async (req, res) => {
   const postId = req.params.postId;
-  const comments = await PostComments.findAll({ where: { PostId: postId } });
-  res.json(comments);
+
+  try {
+    const comments = await PostComments.findAll({
+      where: { PostId: postId },
+      include: [
+        {
+          model: Users,
+          attributes: ["username"],
+        },
+      ],
+      raw: true,
+    });
+
+    // Her yorum için istenmeyen 'User.username' alanını kaldır
+    const formattedComments = comments.map((comment) => {
+      const { "User.username": username, ...restComment } = comment;
+      return {
+        ...restComment,
+        username, // 'username' alanını direkt olarak ekleyin
+      };
+    });
+
+    res.json(formattedComments);
+  } catch (error) {
+    res.status(500).send("Sunucu hatası: " + error.message);
+  }
 });
 
 router.post("/post", validateToken, async (req, res) => {
   const comment = req.body;
   comment.UserId = req.user.id;
-  comment.username = req.user.username;
+
   await PostComments.create(comment);
   res.json(comment);
 });
@@ -27,14 +51,37 @@ router.delete("/post/:commentId", validateToken, async (req, res) => {
 // Media comment routes
 router.get("/media/:mediaId", async (req, res) => {
   const mediaId = req.params.mediaId;
-  const comments = await MediaComments.findAll({ where: { MediaId: mediaId } });
-  res.json(comments);
+
+  try {
+    const comments = await MediaComments.findAll({
+      where: { MediaId: mediaId },
+      include: [
+        {
+          model: Users,
+          attributes: ["username"],
+        },
+      ],
+      raw: true,
+    });
+
+    // Her yorum için istenmeyen 'User.username' alanını kaldır
+    const formattedComments = comments.map((comment) => {
+      const { "User.username": username, ...restComment } = comment;
+      return {
+        ...restComment,
+        username, // 'username' alanını direkt olarak ekleyin
+      };
+    });
+
+    res.json(formattedComments);
+  } catch (error) {
+    res.status(500).send("Sunucu hatası: " + error.message);
+  }
 });
 
 router.post("/media", validateToken, async (req, res) => {
   const commentData = req.body;
   commentData.UserId = req.user.id;
-  commentData.username = req.user.username;
 
   try {
     const newComment = await MediaComments.create(commentData);

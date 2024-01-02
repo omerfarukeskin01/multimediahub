@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
     },
-    Userrole: {
-      type: DataTypes.STRING(50),
-    },
   });
   User.associate = (models) => {
     User.hasMany(models.Likes, {
@@ -30,9 +27,8 @@ module.exports = (sequelize, DataTypes) => {
       as: "follower",
       foreignKey: "followerid",
     });
-    User.hasMany(models.Medias);
+
     User.hasMany(models.Posts);
-    User.hasMany(models.FilmDetails);
     User.hasMany(models.MediaComments);
     User.hasMany(models.PostComments);
 
