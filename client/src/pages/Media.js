@@ -46,10 +46,11 @@ function Media(props) {
             </h1>
             <p>{props.MediaType}</p>
             <div className="mediabutton">
-              <Button type="primary" onClick={showModal}>
-                Share
-              </Button>
-              <Button onClick={showListModal}>LİSTEYE EKLE BABA</Button>
+              
+              <button class="share-button" onClick={showModal}>
+ Share
+</button>
+              <Button className="share-button" onClick={showListModal}>ADD TO LIST</Button>
             </div>
           </div>
         </div>

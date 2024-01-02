@@ -260,7 +260,7 @@ function PostShow(props) {
                         ></path>{" "}
                       </g>
                     </svg>
-                    {4}
+                    {comments.length}
                   </span>
                 </button>
                 {showForm && selectedPostId === value.id && (

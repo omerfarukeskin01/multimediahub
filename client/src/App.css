@@ -3,11 +3,12 @@
 }
 .App {
   width: 100%;
-  height: auto;
+  min-height: 70rem; /* Set a minimum height if needed */
+  height: auto; 
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(100, 74, 104);
+  background-color: rgb(24, 32, 48);
   position: relative;
 }
 body {
@@ -229,7 +230,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color:rgb(100, 74, 104);
+  background-color:rgb(24, 32, 48);
 }
 .basicInfo {
   margin-top: 20px;
@@ -582,9 +583,9 @@ body {
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background-color: rgb(255, 95, 95);
+  background-color:rgb(45, 50, 80);
   cursor: pointer;
-  border: 3px solid rgb(255, 201, 201);
+  border: 3px solid rgb(216, 217, 218);
   transition-duration: 0.3s;
 }
 .bin-bottom {
@@ -840,6 +841,100 @@ body {
 }
 
 /* CREATE POST PAGE CSS */
+
+.wrapper .card .share-button {
+  position: relative;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background-color: #7d2ae8;
+  transition: all 0.2s ease;
+}
+
+.wrapper .card .mediabutton .share-button:active {
+  transform: scale(0.96);
+}
+
+.wrapper .card .mediabutton .share-button:before,
+.wrapper .card .mediabutton .share-button:after {
+  position: absolute;
+  content: "";
+  width: 150%;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1000;
+  background-repeat: no-repeat;
+}
+
+.wrapper .card .mediabutton .share-button:hover:before {
+  top: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+    10% 10%, 18% 18%;
+  background-position: 50% 120%;
+  animation: greentopBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+      50% 50%, 65% 20%, 90% 30%;
+  }
+
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.wrapper .card .mediabutton .share-button:hover::after {
+  bottom: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+  background-position: 50% 0%;
+  animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greenbottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0%;
+  }
+
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0%;
+  }
+
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
 .mediacontainer {
   display: flex;
   flex-wrap: wrap;
@@ -868,8 +963,8 @@ body {
   flex-basis: 300px;
   flex-grow: 0;
   height: 440px;
-  background: #fff;
-  border: 2px solid #fff;
+  background: #000000;
+  border: 2px solid #000000;
   box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
@@ -923,6 +1018,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
+  margin-left: 10px;
 }
 .wrapper .card button {
   width: fit-content;
@@ -931,7 +1027,7 @@ body {
   height: 40px;
   cursor: pointer;
   border-style: none;
-  background-color: #ff3838;
+  background-color: #7a16526f;
   color: #fff;
   font-size: 15px;
   outline: none;
