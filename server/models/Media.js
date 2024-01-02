@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     Media.hasOne(models.GameDetails, {
       foreignKey: "MediaID",
     });
-    Media.belongsTo(models.Users);
+
     Media.hasMany(models.Posts);
     Media.hasOne(models.FilmDetails);
     Media.hasMany(models.MediaComments);

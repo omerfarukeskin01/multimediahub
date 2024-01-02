@@ -32,8 +32,6 @@ module.exports = (sequelize, DataTypes) => {
           } */
   });
   SeriesDetail.associate = (models) => {
-    SeriesDetail.belongsTo(models.Users);
-
     SeriesDetail.belongsTo(models.Medias, {
       foreignKey: "MediaID",
       as: "Media",
