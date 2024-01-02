@@ -86,6 +86,7 @@ const CreatePostModal = (props) => {
                                 autocomplete="off"
                                 id="inputCreatePost"
                                 name="postText"
+                                className="form-control mb-2"
                                 placeholder="(Ex. Post...)"
                             />
                            

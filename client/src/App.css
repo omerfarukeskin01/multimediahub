@@ -15,6 +15,16 @@ body {
   margin: 0;
   padding: 0;
 }
+.ant-modal-content{
+  position: relative;
+    background-color: rgb(24, 32, 48);
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    pointer-events: auto;
+    padding: 20px 24px
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -97,6 +107,13 @@ body {
   color: white;
 }
 /*media details */
+
+.col-md-6{
+  color: white;
+}
+.avarege{
+  color: white;
+}
 .delete-button {
   margin-top: 5px;
   width: 40px;

@@ -203,7 +203,7 @@ function MediaDetail() {
             )}
           </div>
           <div className="col-md-2">
-            <div>Ortalama Puan: {meanRating}</div>
+            <div className="avarege">Ortalama Puan: {meanRating}</div>
           </div>
         </div>
 
