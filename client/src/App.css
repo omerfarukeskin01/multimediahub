@@ -245,6 +245,9 @@ body {
 
 
 /*profile page */
+.wrapper .card .descriptions .medialist{
+  margin-top: -500rem;
+}
 .profilePageContainer {
   display: flex;
   flex-direction: column;

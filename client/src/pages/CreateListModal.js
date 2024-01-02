@@ -71,7 +71,7 @@ function CreateListModal(props) {
       </Snackbar>
       <Modal
         okText="Add list"
-        title="Basic Modal"
+        title="Share"
         open={props.isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

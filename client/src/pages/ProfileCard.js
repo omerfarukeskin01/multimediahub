@@ -147,7 +147,7 @@ function ProfileCard(props) {
           )}
         </div>
         <div className="skills">
-          <h6>Skills</h6>
+          <h6>Lists</h6>
           <ul>
             {listOfLists.map((list) => {
               return (
