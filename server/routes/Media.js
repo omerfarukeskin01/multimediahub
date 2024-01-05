@@ -11,11 +11,17 @@ const {
 const { Op } = require("sequelize");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/", async (req, res) => {
-  const listOfMedias = await Medias.findAll();
-  //const likedPosts = await Likes.findAll({ where: { UserId: req.user.id } });
-  //res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
-  res.json(listOfMedias);
+router.get("/:page", async (req, res) => {
+  const page = req.params.page;
+  const limit = 15;
+  const offset = page * limit - limit;
+  const listOfMedias = await Medias.findAll({
+    limit: limit,
+    offset: offset,
+  }); //, include: [Likes]
+  const count = await Medias.count();
+  const numberOfPages = Math.ceil(count / limit);
+  res.json({ listOfMedias: listOfMedias, numberOfPages: numberOfPages });
 });
 
 router.get("/mediadetail/:id", async (req, res) => {

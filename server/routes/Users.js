@@ -217,6 +217,7 @@ router.get("/basicinfo/:id", async (req, res) => {
 
   res.json(basicInfo);
 });
+
 router.get("/followedposts", validateToken, async (req, res) => {
   const id = req.user.id;
   const listofFollowedposts = await Users.findByPk(id, {
@@ -238,6 +239,12 @@ router.get("/followedposts", validateToken, async (req, res) => {
       },
     ],
   }).catch((err) => res.json(err));
+
+  // listofFollowedposts null ise hata mesajı döndür
+  if (!listofFollowedposts) {
+    return res.status(404).json({ error: "Kullanıcı bulunamadı." });
+  }
+
   const allPosts = listofFollowedposts.follower.map(
     (follower) => follower.Posts
   );
@@ -248,9 +255,12 @@ router.get("/followedposts", validateToken, async (req, res) => {
     likedPosts: likedPosts,
   };
   const newData = {
-    listOfPosts: olddata.listOfPosts.map((postArray) => postArray[0]),
-    likedPosts: olddata.likedPosts,
+    listOfPosts: olddata.listOfPosts.map((postArray) => postArray[0]) || [],
+    likedPosts: olddata.likedPosts || [],
+    
   };
+  console.log("newData", newData);
   res.json(newData);
 });
+
 module.exports = router;

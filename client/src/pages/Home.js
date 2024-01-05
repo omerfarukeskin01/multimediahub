@@ -22,7 +22,7 @@ function Home() {
             : {},
         })
         .then((response) => {
-          setListOfPosts(response.data.listOfPosts);
+          setListOfPosts(response.data?.listOfPosts);
         });
     }
   }, [authState.status, navigate]);
@@ -30,6 +30,7 @@ function Home() {
   return (
     <>
       <div className="homePage">
+        {console.log("-------------", listOfPosts)}
         <PostShow
           listOfPosts={listOfPosts}
           setListOfPosts={setListOfPosts}

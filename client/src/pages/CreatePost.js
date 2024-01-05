@@ -11,7 +11,23 @@ function CreatePost() {
   const { authState } = useContext(AuthContext);
   const [medias, setMedias] = useState([]);
   const carouselRef = useRef();
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(Infinity);
+  const otherMedias = () => {
+    let page = currentPage + 1;
+    setCurrentPage(page);
+    if (page > maxPage) {
+      setCurrentPage(1);
+      page = 1;
+    }
+    axios.get(`http://localhost:3001/Medias/${page}`).then((response) => {
+      setError("");
+      setMedias(response.data?.listOfMedias);
+      setMaxPage(response.data?.numberOfPages);
+      console.log(response.data);
+      window.scrollTo(0, 0);
+    });
+  };
   const next = () => {
     carouselRef.current.next();
   };
@@ -25,17 +41,19 @@ function CreatePost() {
   };
 
   useEffect(() => {
+    setCurrentPage(1);
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     }
 
     axios
-      .get(`http://localhost:3001/Medias/`, {
+      .get(`http://localhost:3001/Medias/${currentPage}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
         setError("");
-        setMedias(response.data);
+        setMedias(response.data?.listOfMedias);
+        setMaxPage(response.data?.numberOfPages);
         console.log(response.data);
       });
   }, []);
@@ -60,11 +78,12 @@ function CreatePost() {
         });
     } else {
       axios
-        .get(`http://localhost:3001/Medias/`, {
+        .get(`http://localhost:3001/Medias/${currentPage}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
-          setMedias(response.data);
+          setMedias(response.data?.listOfMedias);
+          setMaxPage(response.data?.numberOfPages);
         });
     }
   };
@@ -97,6 +116,10 @@ function CreatePost() {
           ))}
         </div>
       )}
+      <div>
+        <button onClick={otherMedias}>Other Medias</button>
+        <span style={{ color: "white" }}>{currentPage}</span>
+      </div>
 
       {/*
       <div className="test">
